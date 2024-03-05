@@ -1,1 +1,1 @@
-# Trip Up - Capstone project
+# Trip Up - Frontend code
