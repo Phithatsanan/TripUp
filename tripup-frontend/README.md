@@ -1,1 +1,1 @@
-# Trip Up project
+# Trip Up - Capstone project
