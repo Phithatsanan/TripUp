@@ -3,7 +3,7 @@ import { Modal } from 'flowbite-react';
 import { useState } from 'react';
 //import { GoogleLogin } from 'react-google-login';
 //import { auth } from './firebase.js'; // Adjust the path as necessary
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import { auth, provider } from '../firebase';
 
@@ -16,8 +16,8 @@ export default function Home() {
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+        //const credential = GoogleAuthProvider.credentialFromResult(result);
+        //const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
         console.log(user);
@@ -25,7 +25,7 @@ export default function Home() {
       })
       .catch((error) => {
         // Handle Errors here.
-        const errorCode = error.code;
+        //const errorCode = error.code;
         const errorMessage = error.message;
         console.error(errorMessage);
         // You can show error messages to users here
