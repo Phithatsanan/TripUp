@@ -29,99 +29,93 @@ export default function Discover() {
                 <div className="py-16 bg-black ">
                     <h1 className="mx-24 text-3xl tracking-tight font-medium text-white ">Popular Cities to Explore</h1>
 
-                    <div className=" overflow-x-auto py-10 px-10">
+                    <div className=" overflow-x-auto  py-10 px-10">
                         {/* <div className=" grid grid-cols-5 gap-6 mx-0   "> */}
-                        <div className=" grid grid-rows-2 grid-flow-col gap-6 mx-0   ">
-                            <div className="w-60 items-center ">
+                        <div className=" grid grid-rows-2 grid-flow-col gap-8 mx-0   ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
+                            <div className="w-60 items-center  hover:brightness-50">
                                 <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
                                 </a>
                             </div>
 
-                            <div className=" w-60  hover:shadow-lg ">
-                                <a href="#" className="block">
-                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
 
 
 
