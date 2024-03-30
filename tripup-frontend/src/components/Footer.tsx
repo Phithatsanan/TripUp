@@ -4,8 +4,6 @@ export default function Footer() {
     return (
         <>
             <footer className=" bg-black shadow  sm:flex sm:items-center sm:justify-between py-10 px-12 sm:py-8 sm:px-16 xl:py-10 xl:px-20 dark:bg-gray-800 antialiased">
-
-
                 <div className="">
                     <p className="mb-4 lg:mb-16 text-3xl font-semibold tracking-tight leading-tight text-white  md:text-4xl">Say hello and<br /> let's work together !</p>
                     <div className="mb-4 flex justify-left items-center space-x-1 sm:mb-3">
@@ -59,10 +57,10 @@ export default function Footer() {
 
                     <form className="max-w-md mx-auto mt-10 sm:mt-0  ">
                         <div className="relative z-0 w-full mb-5 group">
-                            <input type="search" id="default-search" className="block w-full p-2.5  xl:p-3.5 xl:ps-5 ps-3 text-sm text-gray-900 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your email address" required />
+                            <input type="email" id="email-career" className="block w-full p-2.5  xl:p-3.5 xl:ps-5 ps-5 text-sm text-gray-900 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your email address" required />
                         </div>
                         <div className="relative z-0 w-full mb-5 group">
-                            <textarea rows={3} id="default-search" className="block w-full p-2.5 ` xl:p-3.5 xl:ps-5 ps-3 text-sm text-gray-900 border border-gray-300 rounded-2xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe your project" required />
+                            <textarea rows={3} id="describe-career" className="block w-full p-2.5 xl:p-3.5 xl:ps-5 ps-5 text-sm text-gray-900 border border-gray-300 rounded-2xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe your project" required />
                         </div>
                         <button type="submit" className="text-black bg-[#98DB2E]  hover:bg-[#99db2eca]   font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3.5  text-center ">Submit</button>
                     </form>
