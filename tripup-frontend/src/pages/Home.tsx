@@ -72,7 +72,7 @@ export default function Home() {
         </section>
 
         <div className=" py-40 px-10 md:px-20 sm:py-50 bg-center  bg-cover bg-[url('/src/assets/plane.jpeg')]" >
-          <h1 className=" text-4xl text-center  font-medium leading-none tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white mb-6">PLAN YOUR NEXT TRIP WITH US</h1>
+          <h1 className=" text-4xl text-center font-medium leading-none tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white mb-6">Plan your next trip with us</h1>
 
           {/* <p className="mb-6 text-lg font-normal text-white lg:text-xl text-center dark:text-gray-400">Here at TripUp we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p> */}
           <div className='flex justify-center'>

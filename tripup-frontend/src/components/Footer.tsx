@@ -3,7 +3,7 @@
 export default function Footer() {
     return (
         <>
-            <footer className=" bg-black shadow sm:flex sm:items-center sm:justify-between p-4 sm:p-6 xl:py-10 xl:px-20 dark:bg-gray-800 antialiased">
+            <footer className=" bg-black shadow  sm:flex sm:items-center sm:justify-between py-10 px-12 sm:py-8 sm:px-16 xl:py-10 xl:px-20 dark:bg-gray-800 antialiased">
 
 
                 <div className="">
@@ -54,19 +54,17 @@ export default function Footer() {
                         &copy; 2024 <a href="https://tripingup.vercel.app/" className="hover:underline" target="_blank">TripUp</a>. All rights reserved.
                     </p>
                 </div>
-                <div className=" min-w-96 ">
+                <div className="min-w-60  lg:min-w-96 ">
                     {/* <p className="mb-4 lg:mb-16 text-3xl font-semibold tracking-tight leading-tight text-white  md:text-4xl">Say hello and<br /> let's work together !</p> */}
 
-
-
-                    <form className="max-w-md mx-auto">
+                    <form className="max-w-md mx-auto mt-10 sm:mt-0  ">
                         <div className="relative z-0 w-full mb-5 group">
-                            <input type="search" id="default-search" className="block w-full p-3.5 ps-5 text-sm text-gray-900 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your email address" required />
+                            <input type="search" id="default-search" className="block w-full p-2.5  xl:p-3.5 xl:ps-5 ps-3 text-sm text-gray-900 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your email address" required />
                         </div>
                         <div className="relative z-0 w-full mb-5 group">
-                            <textarea rows={3} id="default-search" className="block w-full p-3.5 ps-5 text-sm text-gray-900 border border-gray-300 rounded-2xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe your project" required />
+                            <textarea rows={3} id="default-search" className="block w-full p-2.5 ` xl:p-3.5 xl:ps-5 ps-3 text-sm text-gray-900 border border-gray-300 rounded-2xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe your project" required />
                         </div>
-                        <button type="submit" className="text-black bg-[#98DB2E]  hover:bg-[#99db2eca]   font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>
+                        <button type="submit" className="text-black bg-[#98DB2E]  hover:bg-[#99db2eca]   font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3.5  text-center ">Submit</button>
                     </form>
 
                 </div>
