@@ -27,16 +27,119 @@ export default function Discover() {
                 </section>
 
                 <div className="py-16 bg-black ">
-                    <h1 className="mx-24 mb-5 text-3xl tracking-tight font-medium text-white ">Popular Cities to Explore</h1>
+                    <h1 className="mx-24 text-3xl tracking-tight font-medium text-white ">Popular Cities to Explore</h1>
+
+                    <div className=" overflow-x-auto py-10 px-10">
+                        {/* <div className=" grid grid-cols-5 gap-6 mx-0   "> */}
+                        <div className=" grid grid-rows-2 grid-flow-col gap-6 mx-0   ">
+                            <div className="w-60 items-center ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+                            <div className=" w-60  hover:shadow-lg ">
+                                <a href="#" className="block">
+                                    <img className=" rounded-3xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
                 </div>
 
                 <div className="py-16 ">
-                    <h1 className="mx-24 mb-5 text-3xl tracking-tight font-medium text-black ">Best Destinations to Experience</h1>
+                    <h1 className="mx-24 text-3xl tracking-tight font-medium text-black ">Best Destinations to Experience</h1>
 
-                    <div className=" overflow-x-auto py-5 px-10">
+                    <div className=" overflow-x-auto py-10 px-10">
                         <div className=" grid grid-rows-1 grid-flow-col gap-8 mx-0   ">
-                            
-                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-lg ">
+
+                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
                                 <a href="#" className="block">
                                     <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <div className="p-5">
@@ -45,7 +148,7 @@ export default function Discover() {
                                 </a>
                             </div>
 
-                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-lg ">
+                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
                                 <a href="#" className="block">
                                     <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <div className="p-5">
@@ -54,7 +157,7 @@ export default function Discover() {
                                 </a>
                             </div>
 
-                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-lg ">
+                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
                                 <a href="#" className="block">
                                     <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <div className="p-5">
@@ -63,7 +166,7 @@ export default function Discover() {
                                 </a>
                             </div>
 
-                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-lg ">
+                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
                                 <a href="#" className="block">
                                     <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <div className="p-5">
@@ -72,7 +175,7 @@ export default function Discover() {
                                 </a>
                             </div>
 
-                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-lg ">
+                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
                                 <a href="#" className="block">
                                     <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <div className="p-5">
@@ -81,7 +184,7 @@ export default function Discover() {
                                 </a>
                             </div>
 
-                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-lg ">
+                            <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
                                 <a href="#" className="block">
                                     <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <div className="p-5">
@@ -90,7 +193,7 @@ export default function Discover() {
                                 </a>
                             </div>
 
-                           
+
                         </div>
                     </div>
 

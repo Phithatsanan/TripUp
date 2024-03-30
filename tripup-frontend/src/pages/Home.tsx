@@ -38,7 +38,7 @@ export default function Home() {
     <>
       <Layout>
 
-        <div className="py-52 px-10 md:px-20 sm:py-50 bg-center  bg-cover bg-[url('/src/assets/home-bg-phuket.jpeg')]" >
+        <div className="py-52 px-10 md:px-20 sm:py-50 bg-center bg-cover bg-[url('/src/assets/home-bg-phuket.jpeg')]" >
           <h1 className=" text-4xl  font-medium leading-none tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white">Best Destinations to Experience</h1>
           <h1 className="mb-6 text-4xl  font-medium leading-none tracking-tight text-white md:text-5xl lg:text-6xl dark:text-white">Less Experience to Discover</h1>
 
