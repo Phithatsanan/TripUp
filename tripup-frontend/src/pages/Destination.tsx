@@ -117,23 +117,23 @@ export default function Destination() {
                 <div className=" py-10 md:py-16 px-10 md:px-32">
                     <div className=" grid grid-cols-1 gap-8 mx-0   ">
                         <a href="#" className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                            <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-52 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
+                            <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-44 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
                             <div className="flex flex-col p-10 leading-normal">
                                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
-                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
+                                <p className=" font-normal text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
                             </div>
                         </a>
 
                         <a href="#" className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                            <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-52 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
+                            <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-44 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
                             <div className="flex flex-col p-10 leading-normal">
                                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
-                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
+                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks.</p>
                             </div>
                         </a>
 
                         <a href="#" className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                            <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-52 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
+                            <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-44 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
                             <div className="flex flex-col p-10 leading-normal">
                                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
                                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>

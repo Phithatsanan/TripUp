@@ -19,9 +19,6 @@ export default function App() {
         <Route path="*" element={<NoPage />} />
         {/* Add more routes as needed */}
       </Routes>
-      <Routes>
-        
-      </Routes>
     </BrowserRouter>
   );
 }
