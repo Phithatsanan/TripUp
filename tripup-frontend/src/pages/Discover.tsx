@@ -61,7 +61,7 @@ export default function Discover() {
                                 <div key={index} className="w-60 items-center hover:brightness-50">
                                     <Link to={`/destination/${City.city_name}`} className="block">
                                         <img
-                                            className="rounded-full w-60 h-60 object-cover object-center"
+                                            className="rounded-full w-60 h-40 object-cover object-center"
                                             src={City.city_image}
                                             alt={`View details about ${City.city_name}`}
                                         />
