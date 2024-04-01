@@ -1,4 +1,5 @@
 import Layout from "./Layout";
+import { Link } from "react-router-dom";
 
 export default function Discover() {
     return (
@@ -32,17 +33,17 @@ export default function Discover() {
                         {/* <div className=" grid grid-cols-5 gap-6 mx-0   "> */}
                         <div className=" grid grid-rows-2 grid-flow-col gap-8 mx-0   ">
                             <div className="w-60 items-center  hover:brightness-50">
-                                <a href="/destination" className="block">
+                                <Link to="/destination" className="block">
                                     <img className=" rounded-full " src="https://akholidaysnepal.com/wp-content/uploads/2018/10/bangkok.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Bangkok</figcaption>
-                                </a>
+                                </Link>
                             </div>
 
                             <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
+                                <Link to="#" className="block">
                                     <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                                     <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
+                                </Link>
                             </div>
 
                             <div className="w-60 items-center  hover:brightness-50">
