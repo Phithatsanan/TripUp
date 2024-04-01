@@ -1,11 +1,13 @@
 import Layout from "./Layout";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
+import { Modal } from 'flowbite-react';
+
 
 export default function Destination() {
 
-    const [activeTab, setActiveTab] = useState('dashboard'); // Default active tab is 'dashboard'
-
-    const handleTabClick = (tab) => {
+    const [activeTab, setActiveTab] = useState('adventure'); // Default active tab is 'dashboard'
+    const [openModal, setOpenModal] = useState(false);
+    const handleTabClick = (tab: SetStateAction<string>) => {
         setActiveTab(tab);
     };
 
@@ -56,75 +58,102 @@ export default function Destination() {
             </section>
 
             <div className="py-12 md:py-16 bg-black ">
-                <h1 className=" mx-10 md:mx-24 text-2xl md:text-3xl text-center tracking-tight font-medium text-white ">Things to do in Bangkok</h1>
+                <h1 className="mb-5 mx-10 md:mx-24 text-2xl md:text-3xl text-center tracking-tight font-medium text-white ">Things to do in Bangkok</h1>
 
-                <div className=" overflow-x-auto  py-10 px-10">
-                    {/* <div className=" grid grid-cols-5 gap-6 mx-0   "> */}
-                    <div className=" grid grid-rows-1 grid-flow-col gap-8 mx-0   ">
-                        <div className="w-60 items-center  hover:brightness-50">
-                            <a href="#" className="block">
-                                <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                            </a>
-                        </div>
+                <div className="text-sm font-medium text-center items-center text-white">
+                    <ul className="flex justify-center flex-wrap items-center -mb-px">
+                        <li className="me-2">
+                            <a className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'adventure' ? 'text-[#98DB2E] border-[#98DB2E] ' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('adventure')}>Adventure</a>
+                        </li>
+                        <li className="me-2">
+                            <a className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'leisure' ? 'text-[#98DB2E] border-[#98DB2E] ' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('leisure')}>Leisure</a>
+                        </li>
+                        <li className="me-2">
+                            <a className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'entertainment' ? 'text-[#98DB2E] border-[#98DB2E]' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('entertainment')}>Entertainment</a>
+                        </li>
+                        <li className="me-2">
+                            <a className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'family' ? 'text-[#98DB2E] border-[#98DB2E] ' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('family')}>Family</a>
+                        </li>
+                        <li className="me-2">
+                            <a className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'food' ? 'text-[#98DB2E] border-[#98DB2E] ' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('food')}>Food</a>
+                        </li>
+                    </ul>
+                    {/* Render content based on active tab */}
+                    {activeTab === 'adventure' && <div className=" overflow-x-auto  py-10 px-10">
+                        {/* <div className=" grid grid-cols-5 gap-6 mx-0   "> */}
+                        <div className=" grid grid-rows-1 grid-flow-col gap-8 mx-0   ">
+                            <div className="w-60 items-center  hover:brightness-50">
+                                <a href="#" className="block">
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
 
-                        <div className="w-60 items-center  hover:brightness-50">
-                            <a href="#" className="block">
-                                <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                            </a>
-                        </div>
+                            <div className="w-60 items-center  hover:brightness-50">
+                                <a href="#" className="block">
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
 
-                        <div className="w-60 items-center  hover:brightness-50">
-                            <a href="#" className="block">
-                                <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                            </a>
-                        </div>
+                            <div className="w-60 items-center  hover:brightness-50">
+                                <a href="#" className="block">
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
 
-                        <div className="w-60 items-center  hover:brightness-50">
-                            <a href="#" className="block">
-                                <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                            </a>
-                        </div>
+                            <div className="w-60 items-center  hover:brightness-50">
+                                <a href="#" className="block">
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
 
-                        <div className="w-60 items-center  hover:brightness-50">
-                            <a href="#" className="block">
-                                <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                            </a>
-                        </div>
+                            <div className="w-60 items-center  hover:brightness-50">
+                                <a href="#" className="block">
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
 
-                        <div className="w-60 items-center  hover:brightness-50">
-                            <a href="#" className="block">
-                                <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                            </a>
-                        </div>
+                            <div className="w-60 items-center  hover:brightness-50">
+                                <a href="#" className="block">
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
 
-                        <div className="w-60 items-center  hover:brightness-50">
-                            <a href="#" className="block">
-                                <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                            </a>
-                        </div>
+                            <div className="w-60 items-center  hover:brightness-50">
+                                <a href="#" className="block">
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
 
-                        <div className="w-60 items-center  hover:brightness-50">
-                            <a href="#" className="block">
-                                <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                            </a>
+                            <div className="w-60 items-center  hover:brightness-50">
+                                <a href="#" className="block">
+                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    </div>}
+                    {activeTab === 'leisure' && <div className="mt-10">no content found</div>}
+                    {activeTab === 'entertainment' && <div className="mt-10">no content found</div>}
+                    {activeTab === 'family' && <div className="mt-10">no content found</div>}
+                    {activeTab === 'food' && <div className="mt-10">no content found</div>}
+
                 </div>
+
+
             </div>
 
             <div className="py-12 md:py-16 ">
                 <h1 className="mx-10 md:mx-24 text-2xl md:text-3xl tracking-tight font-medium text-black ">Tourist Attractions in Bangkok</h1>
                 <div className=" py-10 md:py-16 px-10 md:px-32">
                     <div className=" grid grid-cols-1 gap-8 mx-0   ">
-                        <a href="#" className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <a onClick={() => setOpenModal(true)} className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                             <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-44 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
                             <div className="flex flex-col p-10 leading-normal">
                                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
@@ -186,10 +215,33 @@ export default function Destination() {
                         </nav>
                     </div>
                 </div>
-
-
             </div>
 
+
+            <Modal dismissible show={openModal} className='bg-black' size="7xl" position="center" onClose={() => setOpenModal(false)} >
+                <Modal.Header className="py-6 px-10 ">
+                    <h1 className="text-4xl font-normal">Wat Arun</h1>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="flex space-x-5 mb-10">
+                        <h1 className="text-xs">Address: 1 Tiantan E Rd, Dongcheng, Beijing, China Map</h1>
+                        <h1 className="text-xs">Timings: 06:00 am - 08:00 pm</h1>
+                        <h1 className="text-xs">Phone: +86-1067028866</h1>
+                        <h1 className="text-xs">Ticket Price: 10 CNY</h1>
+                        <h1 className="text-xs">  Time Required: 03:00 Hrs</h1>
+                    </div>
+
+                    {/* <h1 className='text-center mb-10 text-2xl font-medium text-black'>Sign In</h1> */}
+                    <div className=" flex flex-col items-center">
+                        <h1>It used to enshrine the Phra Phuttha Maha Mani Rattana Patimakon (the Emerald Buddha) that was brought from Vientiane.
+                            It is located on Arun Amarin Road on the Thon Buri side of the Chao Phraya River directly opposite Wat Pho. It is a temple that has existed since the Ayutthaya period. Originally, it was called Wat Chaeng then later when the King of Krung Thon Buri moved the capital from Ayutthaya to establish Krung Thon Buri, the King graciously decided to have Wat Chaeng as a temple in the royal court area and established it to be a first-class royal temple of the Woramahawihan class. It used to enshrine the Phra Phuttha Maha Mani Rattana Patimakon (the Emerald Buddha) that was brought from Vientiane. This temple underwent a major enovation during the reign of King Rama II; therefore, it is considered a temple of that reign. When the restoration was completed, it was bestowed the royal name of wat arun Ratchatharam. In the reign of King Rama III, there was a construction of a large pagoda that is 82 metres high and 234 metres wide. It was completed in the reign of King Rama IV the Great, and changed its name to Wat Arun Ratchawararam like it is still called today. Open daily 08.00 - 18.00 hrs. Entrance fee : 200 baht. For further details contact, Tel. 0 2891 2185.</h1>
+                    
+                    </div>
+
+
+
+                </Modal.Body>
+            </Modal>
 
         </Layout>
     );

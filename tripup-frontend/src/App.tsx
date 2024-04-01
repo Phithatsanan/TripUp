@@ -16,6 +16,7 @@ export default function App() {
         <Route path="/explore" element={<Explore/>} />
         <Route path="/discover" element={<Discover />} />
         <Route path="/destination" element={<Destination />} />
+        
         <Route path="*" element={<NoPage />} />
         {/* Add more routes as needed */}
       </Routes>
