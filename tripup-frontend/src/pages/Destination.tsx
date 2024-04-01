@@ -1,13 +1,6 @@
 import Layout from "./Layout";
-import { useState } from "react";
 
 export default function Destination() {
-
-    const [activeTab, setActiveTab] = useState('dashboard'); // Default active tab is 'dashboard'
-
-    const handleTabClick = (tab) => {
-        setActiveTab(tab);
-    };
 
     return (
         <Layout>
