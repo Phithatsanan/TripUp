@@ -187,7 +187,3 @@ export default function Destination() {
         </Layout>
     );
 }
-
-
-
-
