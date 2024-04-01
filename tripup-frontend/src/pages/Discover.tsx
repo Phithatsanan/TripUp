@@ -1,7 +1,64 @@
+import { useEffect, useState } from 'react';
 import Layout from "./Layout";
 import { Link } from "react-router-dom";
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase.ts';
+// import { collection, getDocs } from 'firebase/firestore';
+// import { db } from '../firebase.ts'; 
+
+
+// interface City {
+//     city_id: string;
+//     city_name: string;
+//     city_image: string;
+//     // Add any other properties here if present in your city object
+// }
+
+type CityType = {
+    city_id: string;
+    city_name: string;
+    city_image: string;
+};
 
 export default function Discover() {
+    const [cities, setCities] = useState<CityType[]>([]);
+
+    useEffect(() => {
+        const fetchCities = async () => {
+            try {
+                const citiesCol = collection(db, 'Cities');
+                const citySnapshot = await getDocs(citiesCol);
+                const cityList = citySnapshot.docs.map(doc => doc.data() as CityType);
+                setCities(cityList);
+            } catch (error) {
+                console.error("Error fetching cities: ", error);
+            }
+        };
+
+        fetchCities();
+    }, []);
+
+
+    //     const fetchCities = async () => {
+    //         try {
+    //           const citiesCol = collection(db, 'Cities');
+    //           const citySnapshot = await getDocs(citiesCol);
+    //           const cityList = citySnapshot.docs.map((doc) => ({
+    //             city_id: doc.data().city_id,
+    //             city_name: doc.data().city_name,
+    //             city_image: doc.data().city_image,
+    //           }));
+    //           console.log(cityList);
+    //           setCities(cityList);
+    //         } catch (err) {
+    //           console.error("Error fetching cities: ", err);
+    //         }
+    //       };
+
+    //       fetchCities();
+
+
+
     return (
         <>
             <Layout>
@@ -26,95 +83,30 @@ export default function Discover() {
                     </div>
                 </section>
 
-                <div className="py-16 bg-black ">
-                    <h1 className="mx-24 text-3xl tracking-tight font-medium text-white ">Popular Cities to Explore</h1>
-
-                    <div className=" overflow-x-auto  py-10 px-10">
-                        {/* <div className=" grid grid-cols-5 gap-6 mx-0   "> */}
-                        <div className=" grid grid-rows-2 grid-flow-col gap-8 mx-0   ">
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <Link to="/destination" className="block">
-                                    <img className=" rounded-full " src="https://akholidaysnepal.com/wp-content/uploads/2018/10/bangkok.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Bangkok</figcaption>
-                                </Link>
+                <div className="py-16 bg-black">
+                    <h1 className="mx-24 text-3xl tracking-tight font-medium text-white">Popular Cities to Explore</h1>
+                    <div className="overflow-x-auto py-10 px-10">
+                        <div className="grid grid-rows-2 grid-flow-col gap-8 mx-0">
+                            <div className="w-60 items-center hover:brightness-50">
+{cities.map((City, index) => ( // Use the type for the parameter in the map function
+                                 <div key={index} className="w-60 items-center hover:brightness-50">
+                                    <Link to={`/destination/${City.city_name}`} className="block">
+                                        <img
+                                            className="rounded-full"
+                                            src={City.city_image}
+                                            alt={`View details about ${City.city_name}`}
+                                        />
+                                        <figcaption className="mt-4 text-md text-center text-white">
+                                            {City.city_name}
+                                        </figcaption>
+                                    </Link>
+                                </div>
+                            ))}
                             </div>
 
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <Link to="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </Link>
-                            </div>
+                            
 
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
 
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
-
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
-
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
-
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
-
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
-
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
-
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
-
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
-
-                            <div className="w-60 items-center  hover:brightness-50">
-                                <a href="#" className="block">
-                                    <img className=" rounded-full " src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                                    <figcaption className="mt-4 text-md text-center text-white">Image caption</figcaption>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
