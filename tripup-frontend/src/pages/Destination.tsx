@@ -5,7 +5,7 @@ import { Modal } from 'flowbite-react';
 
 export default function Destination() {
 
-    const [activeTab, setActiveTab] = useState('adventure'); // Default active tab is 'dashboard'
+    const [activeTab, setActiveTab] = useState('adventure');
     const [openModal, setOpenModal] = useState(false);
     const handleTabClick = (tab: SetStateAction<string>) => {
         setActiveTab(tab);
@@ -27,7 +27,7 @@ export default function Destination() {
                     <li>
                         <div className="flex items-center">
                             <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <a href="#" className="ms-1 text-sm font-medium text-black hover:text-[#98DB2E] md:ms-2 dark:text-gray-400 dark:hover:text-white">Discover</a>
                         </div>
@@ -35,7 +35,7 @@ export default function Destination() {
                     <li aria-current="page">
                         <div className="flex items-center">
                             <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <span className="ms-1 text-sm font-medium text-black md:ms-2 dark:text-gray-400">Bangkok</span>
                         </div>
@@ -63,20 +63,24 @@ export default function Destination() {
                 <div className="text-sm font-medium text-center items-center text-white">
                     <ul className="flex justify-center flex-wrap items-center -mb-px">
                         <li className="me-2">
-                            <a className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'adventure' ? 'text-[#98DB2E] border-[#98DB2E] ' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('adventure')}>Adventure</a>
+                            <button className={`inline-block p-4 border-b-2 border-transparent  ${activeTab === 'adventure' ? 'text-[#98DB2E] border-b-[#98DB2E] ' : 'hover:text-[#98DB2E] hover:border-[#98DB2E] '}`} onClick={() => handleTabClick('adventure')}>Adventure</button>
                         </li>
                         <li className="me-2">
-                            <a className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'leisure' ? 'text-[#98DB2E] border-[#98DB2E] ' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('leisure')}>Leisure</a>
+                            <button className={`inline-block p-4 border-b-2 border-transparent  ${activeTab === 'leisure' ? 'text-[#98DB2E] border-b-[#98DB2E]' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('leisure')}>Leisure</button>
                         </li>
                         <li className="me-2">
-                            <a className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'entertainment' ? 'text-[#98DB2E] border-[#98DB2E]' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('entertainment')}>Entertainment</a>
+                            <button className={`inline-block p-4 border-b-2 border-transparent  ${activeTab === 'entertainment' ? 'text-[#98DB2E] border-b-[#98DB2E]' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('entertainment')}>Entertainment</button>
                         </li>
                         <li className="me-2">
-                            <a className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'family' ? 'text-[#98DB2E] border-[#98DB2E] ' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('family')}>Family</a>
+                            <button className={`inline-block p-4 border-b-2 border-transparent  ${activeTab === 'family' ? 'text-[#98DB2E] border-b-[#98DB2E]' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('family')}>Family</button>
                         </li>
                         <li className="me-2">
-                            <a className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'food' ? 'text-[#98DB2E] border-[#98DB2E] ' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('food')}>Food</a>
+                            <button className={`inline-block p-4 border-b-2 border-transparent ${activeTab === 'food' ? 'text-[#98DB2E] border-b-[#98DB2E]' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('food')}>Food</button>
                         </li>
+
+                       
+
+
                     </ul>
                     {/* Render content based on active tab */}
                     {activeTab === 'adventure' && <div className=" overflow-x-auto  py-10 px-10">
@@ -145,37 +149,36 @@ export default function Destination() {
                     {activeTab === 'food' && <div className="mt-10">no content found</div>}
 
                 </div>
-
-
             </div>
 
             <div className="py-12 md:py-16 ">
                 <h1 className="mx-10 md:mx-24 text-2xl md:text-3xl tracking-tight font-medium text-black ">Tourist Attractions in Bangkok</h1>
                 <div className=" py-10 md:py-16 px-10 md:px-32">
                     <div className=" grid grid-cols-1 gap-8 mx-0   ">
-                        <a onClick={() => setOpenModal(true)} className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <button onClick={() => setOpenModal(true)} className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                             <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-44 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
-                            <div className="flex flex-col p-10 leading-normal">
-                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
-                                <p className=" font-normal text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
+                            <div className="flex flex-col  p-10 leading-normal">
+                                <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
+                                <p className=" font-normal text-left text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
                             </div>
-                        </a>
+                        </button>
 
-                        <a href="#" className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <button onClick={() => setOpenModal(true)} className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                             <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-44 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
-                            <div className="flex flex-col p-10 leading-normal">
-                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
-                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks.</p>
+                            <div className="flex flex-col  p-10 leading-normal">
+                                <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
+                                <p className=" font-normal text-left text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
                             </div>
-                        </a>
+                        </button>
 
-                        <a href="#" className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <button onClick={() => setOpenModal(true)} className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                             <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-44 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
-                            <div className="flex flex-col p-10 leading-normal">
-                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
-                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
+                            <div className="flex flex-col  p-10 leading-normal">
+                                <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
+                                <p className=" font-normal text-left text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
                             </div>
-                        </a>
+                        </button>
+
 
 
                         <nav aria-label="Page navigation example">
@@ -184,7 +187,7 @@ export default function Destination() {
                                     <a href="#" className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                         <span className="sr-only">Previous</span>
                                         <svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
                                         </svg>
                                     </a>
                                 </li>
@@ -207,12 +210,37 @@ export default function Destination() {
                                     <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-black dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                         <span className="sr-only">Next</span>
                                         <svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                         </svg>
                                     </a>
                                 </li>
                             </ul>
                         </nav>
+
+
+                        <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+                            <ul className="flex flex-wrap -mb-px">
+                                <li className="me-2">
+                                    <button className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'profile' ? 'text-blue-600 border-blue-600 hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' : ''}`} onClick={() => handleTabClick('profile')}>Profile</button>
+                                </li>
+                                <li className="me-2">
+                                    <button className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'dashboard' ? 'text-blue-600 border-blue-600 hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-blue-500' : 'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}`} onClick={() => handleTabClick('dashboard')}>Dashboard</button>
+                                </li>
+                                <li className="me-2">
+                                    <button className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'settings' ? 'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' : ''}`} onClick={() => handleTabClick('settings')}>Settings</button>
+                                </li>
+                                <li className="me-2">
+                                    <button className={`inline-block p-4 border-b-2 border-transparent rounded-t-lg ${activeTab === 'contacts' ? 'hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300' : ''}`} onClick={() => handleTabClick('contacts')}>Contacts</button>
+                                </li>
+
+                            </ul>
+                            {/* Render content based on active tab */}
+                            {activeTab === 'profile' && <div>Profile content</div>}
+                            {activeTab === 'dashboard' && <div>Dashboard content</div>}
+                            {activeTab === 'settings' && <div>Settings content</div>}
+                            {activeTab === 'contacts' && <div>Contacts content</div>}
+                            {activeTab === 'disabled' && <div>Disabled content</div>}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -235,7 +263,7 @@ export default function Destination() {
                     <div className=" flex flex-col items-center">
                         <h1>It used to enshrine the Phra Phuttha Maha Mani Rattana Patimakon (the Emerald Buddha) that was brought from Vientiane.
                             It is located on Arun Amarin Road on the Thon Buri side of the Chao Phraya River directly opposite Wat Pho. It is a temple that has existed since the Ayutthaya period. Originally, it was called Wat Chaeng then later when the King of Krung Thon Buri moved the capital from Ayutthaya to establish Krung Thon Buri, the King graciously decided to have Wat Chaeng as a temple in the royal court area and established it to be a first-class royal temple of the Woramahawihan class. It used to enshrine the Phra Phuttha Maha Mani Rattana Patimakon (the Emerald Buddha) that was brought from Vientiane. This temple underwent a major enovation during the reign of King Rama II; therefore, it is considered a temple of that reign. When the restoration was completed, it was bestowed the royal name of wat arun Ratchatharam. In the reign of King Rama III, there was a construction of a large pagoda that is 82 metres high and 234 metres wide. It was completed in the reign of King Rama IV the Great, and changed its name to Wat Arun Ratchawararam like it is still called today. Open daily 08.00 - 18.00 hrs. Entrance fee : 200 baht. For further details contact, Tel. 0 2891 2185.</h1>
-                    
+
                     </div>
 
 
@@ -246,7 +274,3 @@ export default function Destination() {
         </Layout>
     );
 }
-
-
-
-
