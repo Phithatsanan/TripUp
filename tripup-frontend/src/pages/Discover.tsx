@@ -47,7 +47,7 @@ export default function Discover() {
         <section className="bg-white dark:bg-gray-900">
           <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-12 lg:px-6">
             <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-0">
-              <h1 className="mb-8 text-2xl tracking-tight font-medium text-gray-900 dark:text-white">Search your favorite destinations!</h1>
+              <h1 className="mb-8 text-2xl md:text-3xl tracking-tight font-medium text-gray-900 dark:text-white">Search your favorite destinations!</h1>
               <div className="relative">
                 <input
                   type="search"
@@ -62,7 +62,7 @@ export default function Discover() {
         </section>
 
         <div className="py-16 bg-black">
-          <h1 className="mx-24 text-3xl tracking-tight font-medium text-white">
+          <h1 className="mb-5 mx-10 md:mx-24 text-2xl md:text-3xl text-center tracking-tight font-medium text-white">
             {searchTerm ? `Results for "${searchTerm}"` : "Popular Cities to Explore"}
           </h1>
           {/* Set a max-height for the container to fit two rows and allow horizontal scrolling */}
@@ -93,7 +93,7 @@ export default function Discover() {
 
 
         <div className="py-16 ">
-          <h1 className="mx-24 text-3xl tracking-tight font-medium text-black ">Best Destinations to Experience</h1>
+          <h1 className="mb-5 mx-10 md:mx-24 text-2xl md:text-3xl text-center tracking-tight font-medium text-black">Best Destinations to Experience</h1>
 
           <div className=" overflow-x-auto py-10 px-10">
             <div className=" grid grid-rows-1 grid-flow-col gap-8 mx-0   ">

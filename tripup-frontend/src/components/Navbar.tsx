@@ -7,6 +7,7 @@ import { signInWithPopup } from 'firebase/auth';
 export default function NavBar() {
 
     const [openModal, setOpenModal] = useState(false);
+    const [openMobileMenu, setopenMobileMenu] = useState(false);
 
     const signInWithGoogle = () => {
         signInWithPopup(auth, provider)
@@ -46,21 +47,21 @@ export default function NavBar() {
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span className="text-white self-center text-xl font-semibold whitespace-nowrap dark:text-white">TripUp999</span>
+                            <span className="text-white self-center text-xl font-semibold whitespace-nowrap dark:text-white">TripUp</span>
                         </a>
                         <div className="flex items-center lg:order-2">
                             <button onClick={() => setOpenModal(true)} className="text-gray-800 bg-[#98DB2E] dark:text-white hover:bg-[#99db2eca]  font-medium rounded-lg text-sm px-4 lg:px-5 py-3.5 lg:py-2.5 mr-2 dark:hover:bg-gray-700 ">Sign in</button>
                             {/* <a href="#" className="text-white  hover:bg-white hover:text-black   font-medium rounded-lg text-sm px-4 lg:px-5 py-3.5 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 ">Get started</a> */}
-                            <button data-collapse-toggle="mobile-menu-2" type="button" className="inline-flex items-center p-2 ml-1 text-sm text-white ring-2 ring-white hover:text-black rounded-lg lg:hidden hover:bg-white  dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+                            <button onClick={() => setopenMobileMenu(true)} type="button" className="inline-flex items-center p-2 ml-1 text-sm text-white ring-2 ring-white hover:text-black rounded-lg lg:hidden hover:bg-white  dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
                                 <span className="sr-only">Open main menu</span>
                                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
                                 <svg className="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                             </button>
                         </div>
-                        <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                        <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" >
                             <ul className="flex flex-col mt-4 font-normal lg:flex-row lg:space-x-8 lg:mt-0">
                                 <li>
-                                    <Link to="/" className="block py-2 pr-4 pl-3 hover:text-[#98DB2E] text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Home</Link>
+                                    <Link to="/" className={"block py-2 pr-4 pl-3 hover:text-[#98DB2E] text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"} aria-current="page" >Home</Link>
                                 </li>
                                 <li>
                                     <Link to="/discover" className="block py-2 pr-4 pl-3 hover:text-[#98DB2E] text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Discover</Link>
@@ -68,9 +69,34 @@ export default function NavBar() {
                                 <li>
                                     <Link to="/explore" className="block py-2 pr-4 pl-3 hover:text-[#98DB2E] text-white border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Explore</Link>
                                 </li>
-
                             </ul>
                         </div>
+                        {openMobileMenu && (
+                            <Modal  className='bg-black' size="sm" position="center" onClose={() => setOpenModal(false)} popup >
+                            <Modal.Header ></Modal.Header>
+                            <Modal.Body>
+                                <h1 className='text-center mb-10 text-2xl font-medium text-black'>Sign In</h1>
+                                <div className=" flex flex-col items-center">
+                                    <button onClick={signInWithGoogle} type="button" className=" w-60 flex items-center justify-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-3  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                        <svg className="mr-2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 48 48">
+                                            <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+                                        </svg>
+            
+                                        Sign in with Google
+                                    </button>
+                                    <button type="button" className=" w-60 flex items-center justify-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 mb-5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                        <svg className="mr-2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50">
+                                            <path d="M25,3C12.85,3,3,12.85,3,25c0,11.03,8.125,20.137,18.712,21.728V30.831h-5.443v-5.783h5.443v-3.848 c0-6.371,3.104-9.168,8.399-9.168c2.536,0,3.877,0.188,4.512,0.274v5.048h-3.612c-2.248,0-3.033,2.131-3.033,4.533v3.161h6.588 l-0.894,5.783h-5.694v15.944C38.716,45.318,47,36.137,47,25C47,12.85,37.15,3,25,3z"></path>
+                                        </svg>
+                                        Sign in with Facebook
+                                    </button>
+                                </div>
+            
+            
+            
+                            </Modal.Body>
+                        </Modal>
+                        )}
                     </div>
                 </nav>
             </header>
