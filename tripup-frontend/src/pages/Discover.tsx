@@ -48,7 +48,7 @@ export default function Discover() {
           <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-12 lg:px-6">
             <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-0">
               <h1 className="mb-8 text-2xl md:text-3xl tracking-tight font-medium text-gray-900 dark:text-white">Search your favorite destinations!</h1>
-              <div className="relative">
+              <div className="">
                 <input
                   type="search"
                   value={searchTerm}
