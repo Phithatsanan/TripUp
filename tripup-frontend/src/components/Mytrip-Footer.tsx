@@ -1,12 +1,68 @@
 
-
 export default function Footer() {
+
     return (
-        <>
-            <footer className=" bg-black shadow  sm:flex sm:items-center sm:justify-between py-10 px-12 sm:py-8 sm:px-16 xl:py-10 xl:px-20 dark:bg-gray-800 antialiased">
-                <div className="">
-                    <p className="mb-4 lg:mb-16 text-3xl font-semibold tracking-tight leading-tight text-white  md:text-4xl">Say hello and<br /> let's work together !</p>
-                    <div className="mb-4 flex justify-left items-center space-x-1 sm:mb-3">
+        <footer className="bg-black dark:bg-gray-900">
+            <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+                <div className="md:flex md:justify-between">
+                    <div className="mb-6 md:mb-0">
+                        <a href="https://flowbite.com/" className="flex items-center">
+                            
+                            <svg className="h-8 me-3" viewBox="0 0 45 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clipPath="url(#clip0_1_32)">
+                                    <path d="M12.3994 19.165C12.3709 19.4892 12.1718 20.5898 10.8779 21.2154L10.8153 21.2439C10.5053 21.3861 10.1328 21.4885 9.70615 21.5482L9.60946 21.4742C9.57817 21.2581 9.56396 21.0562 9.56396 20.8713C9.56396 19.3698 10.474 18.7697 10.912 18.5706C11.3215 18.3801 11.6998 18.2749 11.9728 18.2749C12.1349 18.2749 12.1974 18.3118 12.2117 18.3232C12.3169 18.3971 12.442 18.7071 12.3994 19.165Z" fill="#98DB2E" />
+                                    <path d="M32.8527 5.14745L19.6229 20.6694L19.6911 21.5027L22.0715 23.5304L22.9047 23.4621L31.6923 13.0137L31.7379 13.0307C31.8516 17.7516 31.0326 24.2726 23.4138 27.7763C20.5841 29.0788 17.7772 29.2352 15.2888 28.2285C13.9351 27.6796 12.6525 26.7554 11.6486 25.6093L11.6799 25.5097C12.0041 25.4102 12.3197 25.2936 12.6155 25.1571C14.9048 24.102 16.4661 21.9605 16.688 19.5631C16.87 17.5952 16.1277 15.8177 14.7029 14.8082C13.8299 14.1939 11.9472 13.3521 9.11183 14.6574C6.4727 15.8689 5.13607 18.4341 5.4489 21.6961C5.52 22.4355 6.36463 29.0134 13.6621 32.2156C15.5191 33.029 17.4444 33.356 19.2731 33.356C21.7473 33.356 24.0423 32.7617 25.76 31.971C29.9291 30.0543 32.8271 26.8293 34.8747 21.824C35.8899 19.3413 36.362 15.9059 36.0748 13.1672L36.1061 13.1502L41.8394 19.0313V20.951C41.8394 32.5228 32.4602 41.9048 20.8884 41.9048C10.3745 41.9048 1.66937 34.1608 0.164946 24.0679C0.528964 24.2243 0.921421 24.3978 1.34232 24.5883C2.12723 24.9438 3.01168 25.3647 3.98429 25.8681C4.06961 25.9136 4.16062 25.9335 4.25162 25.9335C4.39097 25.9335 4.53032 25.8823 4.63839 25.7856C4.8204 25.6235 4.88012 25.3704 4.78912 25.1457C4.50473 24.4091 4.55592 23.1777 4.90856 22.3416C5.01663 22.0885 5.01378 21.807 4.90572 21.5482C4.79765 21.2865 4.58151 21.0761 4.31703 20.9709C3.32736 20.5784 2.50831 20.2627 1.82862 20.0011C1.0494 19.7025 0.443647 19.4693 0 19.2816C0.403833 14.1597 2.64766 9.56117 6.07171 6.13712C9.86547 2.34337 15.1039 0 20.8884 0H41.8394V13.116L33.72 5.11048L32.8527 5.14745Z" fill="#98DB2E" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_1_32">
+                                        <rect width="45" height="44" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <span className="text-white self-center text-2xl font-semibold whitespace-nowrap dark:text-white">TripUp</span>
+                        </a>
+                    </div>
+                    <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                        <div>
+                            <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Resources</h2>
+                            <ul className="text-white dark:text-gray-400 font-medium">
+                                <li className="mb-4">
+                                    <a href="https://flowbite.com/" className="hover:underline">Flowbite</a>
+                                </li>
+                                <li>
+                                    <a href="https://tailwindcss.com/" className="hover:underline">Tailwind CSS</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Follow us</h2>
+                            <ul className="text-white dark:text-gray-400 font-medium">
+                                <li className="mb-4">
+                                    <a href="https://github.com/themesberg/flowbite" className="hover:underline ">Github</a>
+                                </li>
+                                <li>
+                                    <a href="https://discord.gg/4eeurUVvTy" className="hover:underline">Discord</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Legal</h2>
+                            <ul className="text-white dark:text-gray-400 font-medium">
+                                <li className="mb-4">
+                                    <a href="#" className="hover:underline">Privacy Policy</a>
+                                </li>
+                                <li>
+                                    <a href="#" className="hover:underline">Terms &amp; Conditions</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+                <div className="sm:flex sm:items-center sm:justify-between">
+                    <span className="text-sm text-white sm:text-center dark:text-gray-400">© 2024 <a href="https://google.com" className="hover:underline">TripUp™</a>. All Rights Reserved.
+                    </span>
+                    <div className=" flex justify-left items-center space-x-1 ">
                         <a href="#" data-tooltip-target="tooltip-facebook" className="inline-flex justify-center p-2 text-white rounded-lg cursor-pointer dark:text-gray-400 dark:hover:text-white hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600">
                             <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
                                 <path fillRule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clipRule="evenodd" />
@@ -48,26 +104,9 @@ export default function Footer() {
                             <div className="tooltip-arrow" data-popper-arrow></div>
                         </div>
                     </div>
-                    <p className=" text-sm  text-white dark:text-gray-400 ">
-                        &copy; 2024 <a href="https://tripingup.vercel.app/" className="hover:underline" target="_blank">TripUp™</a>. All rights reserved.
-                    </p>
                 </div>
-                <div className="min-w-60  lg:min-w-96 ">
-                    {/* <p className="mb-4 lg:mb-16 text-3xl font-semibold tracking-tight leading-tight text-white  md:text-4xl">Say hello and<br /> let's work together !</p> */}
+            </div>
+        </footer>
 
-                    <form className="max-w-md mx-auto mt-10 sm:mt-0  ">
-                        <div className="relative z-0 w-full mb-5 group">
-                            <input type="email" id="email-career" className="block w-full p-2.5  xl:p-3.5 xl:ps-5 ps-5 text-sm text-gray-900 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your email address" required />
-                        </div>
-                        <div className="relative z-0 w-full mb-5 group">
-                            <textarea rows={3} id="describe-career" className="block w-full p-2.5 xl:p-3.5 xl:ps-5 ps-5 text-sm text-gray-900 border border-gray-300 rounded-2xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe your project" required />
-                        </div>
-                        <button type="submit" className="text-black bg-[#98DB2E]  hover:bg-[#99db2eca]   font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3.5  text-center ">Submit</button>
-                    </form>
-
-                </div>
-
-            </footer>
-        </>
     )
-}   
+}

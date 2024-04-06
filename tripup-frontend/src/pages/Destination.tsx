@@ -53,7 +53,7 @@ export default function Destination() {
                         <span className="font-semibold text-md">YOUR ESSENTIAL GUIDE TO</span>
                     </div>
                     <h2 className="mb-5 text-7xl md:text-8xl font-medium tracking-tight text-black dark:text-white">Bangkok</h2>
-                    <p className="mb-5 text-lg font-light text-black dark:text-gray-400">Bangkok is the capital and most important city in Thailand, with a population of over 10 million people. Thanks to its growing economic development and massive popularity as an international tourist destination, it has become one of Southeast Asia's most influential and modern cities.</p>
+                    <p className="text-justify mb-5 text-lg font-light text-black dark:text-gray-400">Bangkok is the capital and most important city in Thailand, with a population of over 10 million people. Thanks to its growing economic development and massive popularity as an international tourist destination, it has become one of Southeast Asia's most influential and modern cities.</p>
                 </div>
             </section>
 
@@ -159,7 +159,7 @@ export default function Destination() {
                             <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-44 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
                             <div className="flex flex-col  p-10 leading-normal">
                                 <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
-                                <p className=" font-normal text-left text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
+                                <p className=" text-justify font-normal text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
                             </div>
                         </button>
 
@@ -167,7 +167,7 @@ export default function Destination() {
                             <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-44 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
                             <div className="flex flex-col  p-10 leading-normal">
                                 <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
-                                <p className=" font-normal text-left text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
+                                <p className=" font-normal text-justify text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
                             </div>
                         </button>
 
@@ -175,7 +175,7 @@ export default function Destination() {
                             <img className="object-cover w-full rounded-t-xl  h-72 md:h-auto md:w-44 md:rounded-none md:rounded-s-3xl" src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/shutterstockRF_517093306.jpg" alt="" />
                             <div className="flex flex-col  p-10 leading-normal">
                                 <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">Wat Arun</h5>
-                                <p className=" font-normal text-left text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
+                                <p className=" font-normal text-justify text-gray-700 dark:text-gray-400">Wat Arun is the missile-shaped temple that rises from the Chao Phraya River's banks. Known as Temple of Dawn, it was named after the Indian god of dawn, Arun. It was here that, after the destruction of Ayuthaya, King Taksin stumbled upon a small local shrine and interpreted the discovery as an auspicious sign that this should be the site of the new capital of Siam.</p>
                             </div>
                         </button>
 
@@ -224,22 +224,23 @@ export default function Destination() {
             </div>
 
 
-            <Modal dismissible show={openModal} className='bg-black' size="7xl" position="center" onClose={() => setOpenModal(false)} >
+            <Modal dismissible show={openModal} className='bg-black ' size="7xl" position="center" onClose={() => setOpenModal(false)} >
                 <Modal.Header className="py-6 px-10 ">
-                    <h1 className="text-4xl font-normal">Wat Arun</h1>
+                    <h1 className="text-4xl font-medium">Wat Arun</h1>
                 </Modal.Header>
-                <Modal.Body>
-                    <div className="flex space-x-5 mb-10">
-                        <h1 className="text-xs">Address: 1 Tiantan E Rd, Dongcheng, Beijing, China Map</h1>
-                        <h1 className="text-xs">Timings: 06:00 am - 08:00 pm</h1>
-                        <h1 className="text-xs">Phone: +86-1067028866</h1>
-                        <h1 className="text-xs">Ticket Price: 10 CNY</h1>
-                        <h1 className="text-xs">  Time Required: 03:00 Hrs</h1>
+                <Modal.Body className="mx-5">
+                    <div className="flex space-x-5 mb-10  justify-left">
+                        <h1 className=" font-semibold text-xs">Address: 1 Tiantan E Rd, Dongcheng, Beijing, China Map</h1>
+                        <h1 className="font-semibold text-xs">Timings: 06:00 am - 08:00 pm</h1>
+                        <h1 className="font-semibold text-xs">Phone: +86-1067028866</h1>
+                        <h1 className="font-semibold text-xs">Ticket Price: 10 CNY</h1>
+                        <h1 className="font-semibold text-xs">  Time Required: 03:00 Hrs</h1>
                     </div>
 
                     {/* <h1 className='text-center mb-10 text-2xl font-medium text-black'>Sign In</h1> */}
-                    <div className=" flex flex-col items-center">
-                        <h1>It used to enshrine the Phra Phuttha Maha Mani Rattana Patimakon (the Emerald Buddha) that was brought from Vientiane.
+                    <div className=" ">
+                        <img className="float-right ml-10 mb-5 w-1/2 rounded-xl " src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/500pxRF_28050155.jpg" alt="" />
+                        <h1 className=" text-justify">It used to enshrine the Phra Phuttha Maha Mani Rattana Patimakon (the Emerald Buddha) that was brought from Vientiane.
                             It is located on Arun Amarin Road on the Thon Buri side of the Chao Phraya River directly opposite Wat Pho. It is a temple that has existed since the Ayutthaya period. Originally, it was called Wat Chaeng then later when the King of Krung Thon Buri moved the capital from Ayutthaya to establish Krung Thon Buri, the King graciously decided to have Wat Chaeng as a temple in the royal court area and established it to be a first-class royal temple of the Woramahawihan class. It used to enshrine the Phra Phuttha Maha Mani Rattana Patimakon (the Emerald Buddha) that was brought from Vientiane. This temple underwent a major enovation during the reign of King Rama II; therefore, it is considered a temple of that reign. When the restoration was completed, it was bestowed the royal name of wat arun Ratchatharam. In the reign of King Rama III, there was a construction of a large pagoda that is 82 metres high and 234 metres wide. It was completed in the reign of King Rama IV the Great, and changed its name to Wat Arun Ratchawararam like it is still called today. Open daily 08.00 - 18.00 hrs. Entrance fee : 200 baht. For further details contact, Tel. 0 2891 2185.</h1>
 
                     </div>
