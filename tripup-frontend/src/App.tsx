@@ -2,7 +2,7 @@ import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import Discover from "./pages/Discover";
 import Destination from "./pages/Destination";
-import Mytrip from "./pages/mytrip";
+import Mytrip from "./pages/Mytrip";
 import NoPage from "./pages/NoPage";
 
 
