@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal } from 'flowbite-react';
 import { auth, provider } from '../firebase';
-import { signInWithRedirect, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
+import { signInWithRedirect } from "firebase/auth";
 // import firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -33,23 +33,23 @@ export default function NavBar() {
 
     const signInWithGoogle = () => {
         signInWithRedirect(auth, provider);
-        getRedirectResult(auth)
-            .then((result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
-                // The signed-in user info.
-                const user = result.user;
-                console.log(user);
-                // You can redirect the user to another page or update the UI accordingly
-            })
-            .catch((error) => {
-                // Handle Errors here.
-                //const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(errorMessage);
-                // You can show error messages to users here
-            });
+        // getRedirectResult(auth)
+        //     .then((result) => {
+        //         // This gives you a Google Access Token. You can use it to access the Google API.
+        //         const credential = GoogleAuthProvider.credentialFromResult(result);
+        //         const token = credential.accessToken;
+        //         // The signed-in user info.
+        //         const user = result.user;
+        //         console.log(user);
+        //         // You can redirect the user to another page or update the UI accordingly
+        //     })
+        //     .catch((error) => {
+        //         // Handle Errors here.
+        //         //const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         console.error(errorMessage);
+        //         // You can show error messages to users here
+        //     });
     };
 
     return (
