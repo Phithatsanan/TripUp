@@ -16,9 +16,10 @@ export default function Mytrip() {
                         <h1 className=" text-4xl  tracking-tight font-semibold text-black ">My Trip</h1>
                         <button onClick={() => setOpenModal(true)} className="flex h-12 items-center  text-black bg-[#98DB2E] dark:text-white hover:bg-[#99db2eca] gap-2 font-medium rounded-xl text-sm px-5 py-2.5  ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
-                            Add new trip
+
+                            New trip
                         </button>
                     </div>
                     <div className=" py-14 px-10 md:px-32">
@@ -98,7 +99,7 @@ export default function Mytrip() {
                     </Modal.Header>
                     <Modal.Body className="mx-5">
                         <form action="#">
-                            <div className="grid grid-rows-3 grid-flow-col gap-4 ">
+                            <div className="grid grid-rows-3 grid-flow-col gap-5 ">
                                 <div className=" col-span-2">
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Name</label>
                                     <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter trip name" />
@@ -113,11 +114,11 @@ export default function Mytrip() {
                                         <option value="Khaoyai">Khaoyai</option>
                                     </select>
                                 </div>
-                                
+
                                 <div className=" col-span-2">
                                     <label htmlFor="startdate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Duration</label>
                                     <div className="flex items-center">
-                                    
+
                                         {/* <div className=" relative">
                                             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                                 <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -127,16 +128,21 @@ export default function Mytrip() {
                                             <input name="start" type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start" />
                                             
                                         </div> */}
-                                        <Datepicker/>
+                                        <Datepicker className="focus:ring-[#98DB2E] focus:border-[#98DB2E] block" />
                                         <span className="mx-4 text-gray-500">to</span>
-                                        <Datepicker/>
+                                        <Datepicker />
                                     </div>
                                 </div>
-                                <div className="row-span-3 col-span-12">
-
+                                <div className="row-span-3 col-span-12 items-center content-center space-y-4 ">
+                                    <div className="flex items-center justify-center w-full ">
+                                        <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center   cursor-pointer   ">
+                                            <div className=" text-center text-gray-500 dark:text-gray-400 hover:brightness-50">
+                                                <img className="mx-auto ring-1 ring-gray-300 w-auto h-52 rounded-2xl" src="https://www.survivorsuk.org/wp-content/uploads/2017/01/no-image.jpg" alt="" />
+                                            </div>
+                                            <input id="dropzone-file" type="file" className="hidden" />
+                                        </label>
+                                    </div>
                                 </div>
-
-
 
                             </div>
                             <div className="flex items-center mt-10  border-gray-200  dark:border-gray-600">
