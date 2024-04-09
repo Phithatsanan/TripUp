@@ -2,31 +2,54 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal } from 'flowbite-react';
 import { auth, provider } from '../firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithRedirect } from "firebase/auth";
+// import firebase from 'firebase/app';
+import 'firebase/auth';
+
 
 export default function NavBar() {
-
+    //const [user, setUser] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [openMobileMenu, setopenMobileMenu] = useState(false);
 
+    // useEffect(() => {
+    //     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    //       if (user) {
+    //         // User is signed in.
+    //         setUser(user);
+    //       } else {
+    //         // No user is signed in.
+    //         setUser(null);
+    //       }
+    //     });
+    
+    //     // Clean up subscription
+    //     return () => unsubscribe();
+    //   }, []);
+    
+    // const handleSignOut = () => {
+    //     firebase.auth().signOut();
+    // };
+
     const signInWithGoogle = () => {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                // This gives you a Google Access Token. You can use it to access the Google API.
-                //const credential = GoogleAuthProvider.credentialFromResult(result);
-                //const token = credential.accessToken;
-                // The signed-in user info.
-                const user = result.user;
-                console.log(user);
-                // You can redirect the user to another page or update the UI accordingly
-            })
-            .catch((error) => {
-                // Handle Errors here.
-                //const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(errorMessage);
-                // You can show error messages to users here
-            });
+        signInWithRedirect(auth, provider);
+        // getRedirectResult(auth)
+        //     .then((result) => {
+        //         // This gives you a Google Access Token. You can use it to access the Google API.
+        //         const credential = GoogleAuthProvider.credentialFromResult(result);
+        //         const token = credential.accessToken;
+        //         // The signed-in user info.
+        //         const user = result.user;
+        //         console.log(user);
+        //         // You can redirect the user to another page or update the UI accordingly
+        //     })
+        //     .catch((error) => {
+        //         // Handle Errors here.
+        //         //const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         console.error(errorMessage);
+        //         // You can show error messages to users here
+        //     });
     };
 
     return (
@@ -50,7 +73,7 @@ export default function NavBar() {
                             <span className="text-white self-center text-xl font-semibold whitespace-nowrap dark:text-white">TripUp</span>
                         </a>
                         <div className="flex items-center lg:order-2">
-                            <button onClick={() => setOpenModal(true)} className="text-gray-800 bg-[#98DB2E] dark:text-white hover:bg-[#99db2eca]  font-medium rounded-lg text-sm px-4 lg:px-5 py-3.5 lg:py-2.5 mr-2 dark:hover:bg-gray-700 ">Sign in</button>
+                            <button onClick={() => setOpenModal(true)} className="text-gray-800 bg-[#98DB2E] dark:text-white  hover:bg-[#99db2eca]  font-medium rounded-lg text-sm px-4 lg:px-5 py-3.5 lg:py-2.5 mr-2 dark:hover:bg-gray-700 ">Sign in</button>
                             {/* <a href="#" className="text-white  hover:bg-white hover:text-black   font-medium rounded-lg text-sm px-4 lg:px-5 py-3.5 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 ">Get started</a> */}
                             <button onClick={() => setopenMobileMenu(true)} type="button" className="inline-flex items-center p-2 ml-1 text-sm text-white ring-2 ring-white hover:text-black rounded-lg lg:hidden hover:bg-white  dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
                                 <span className="sr-only">Open main menu</span>
@@ -84,7 +107,7 @@ export default function NavBar() {
             
                                         Sign in with Google
                                     </button>
-                                    <button type="button" className=" w-60 flex items-center justify-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 mb-5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                    <button type="button"  className="disabled w-60 flex items-center justify-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 mb-5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                                         <svg className="mr-2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50">
                                             <path d="M25,3C12.85,3,3,12.85,3,25c0,11.03,8.125,20.137,18.712,21.728V30.831h-5.443v-5.783h5.443v-3.848 c0-6.371,3.104-9.168,8.399-9.168c2.536,0,3.877,0.188,4.512,0.274v5.048h-3.612c-2.248,0-3.033,2.131-3.033,4.533v3.161h6.588 l-0.894,5.783h-5.694v15.944C38.716,45.318,47,36.137,47,25C47,12.85,37.15,3,25,3z"></path>
                                         </svg>
@@ -113,7 +136,7 @@ export default function NavBar() {
 
                             Sign in with Google
                         </button>
-                        <button type="button" className=" w-60 flex items-center justify-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 mb-5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                        <button type="button" disabled className=" cursor-not-allowed w-60 flex items-center justify-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded-lg text-sm px-5 py-2.5 mb-5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                             <svg className="mr-2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50">
                                 <path d="M25,3C12.85,3,3,12.85,3,25c0,11.03,8.125,20.137,18.712,21.728V30.831h-5.443v-5.783h5.443v-3.848 c0-6.371,3.104-9.168,8.399-9.168c2.536,0,3.877,0.188,4.512,0.274v5.048h-3.612c-2.248,0-3.033,2.131-3.033,4.533v3.161h6.588 l-0.894,5.783h-5.694v15.944C38.716,45.318,47,36.137,47,25C47,12.85,37.15,3,25,3z"></path>
                             </svg>
