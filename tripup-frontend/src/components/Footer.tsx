@@ -55,13 +55,16 @@ export default function Footer() {
                 <div className="min-w-60  lg:min-w-96 ">
                     {/* <p className="mb-4 lg:mb-16 text-3xl font-semibold tracking-tight leading-tight text-white  md:text-4xl">Say hello and<br /> let's work together !</p> */}
 
-                    <form className="max-w-md mx-auto mt-10 sm:mt-0  ">
-                        <div className="relative z-0 w-full mb-5 group">
-                            <input type="email" id="email-career" className="block w-full p-2.5  xl:p-3.5 xl:ps-5 ps-5 text-sm text-gray-900 border border-gray-300 rounded-3xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your email address" required />
+                    <form className="max-w-md mx-auto mt-10 sm:mt-0 ">
+                        <div className="relative mb-4">
+                            <input type="email" id="contact-email" className="block px-5 py-3.5 w-full text-sm text-white bg-transparent rounded-full border-1 border-white appearance-none   focus:outline-none focus:ring-0 focus:border-[#98DB2E] peer" placeholder=" " />
+                            <label htmlFor="contact-email" className="absolute text-sm  text-white  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-black  px-2 peer-focus:px-2 peer-focus:text-[#98DB2E]  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-4">Your email address</label>
                         </div>
-                        <div className="relative z-0 w-full mb-5 group">
-                            <textarea rows={3} id="describe-career" className="block w-full p-2.5 xl:p-3.5 xl:ps-5 ps-5 text-sm text-gray-900 border border-gray-300 rounded-2xl bg-gray-50 focus:ring-[#98DB2E] focus:border-[#98DB2E] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe your project" required />
+                        <div className="relative mb-4">
+                            <textarea rows={3} id="contact-description" className="block px-5 py-3.5 w-full text-sm text-white bg-transparent rounded-3xl border-1 border-white appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0 focus:border-[#98DB2E] peer" placeholder=" " />
+                            <label htmlFor="contact-description" className="absolute text-sm  text-white  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-black  px-2 peer-focus:px-2 peer-focus:text-[#98DB2E]  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-4">Describe something</label>
                         </div>
+
                         <button type="submit" className="text-black bg-[#98DB2E]  hover:bg-[#99db2eca]   font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3.5  text-center ">Submit</button>
                     </form>
 

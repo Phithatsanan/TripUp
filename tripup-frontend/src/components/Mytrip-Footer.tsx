@@ -22,7 +22,7 @@ export default function Footer() {
                             <span className="text-white self-center text-2xl font-semibold whitespace-nowrap dark:text-white">TripUp</span>
                         </a>
                     </div>
-                    <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    {/* <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                         <div>
                             <h2 className="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Resources</h2>
                             <ul className="text-white dark:text-gray-400 font-medium">
@@ -56,7 +56,7 @@ export default function Footer() {
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
                 <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
                 <div className="sm:flex sm:items-center sm:justify-between">
