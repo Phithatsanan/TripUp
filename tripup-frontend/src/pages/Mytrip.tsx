@@ -2,8 +2,7 @@
 import MytripLayout from "./Mytrip-Layout";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Modal } from "flowbite-react";
-// import Datepicker from 'flowbite-react';
+import { Modal, Datepicker } from "flowbite-react";
 
 export default function Mytrip() {
     const [openModal, setOpenModal] = useState(false);
@@ -12,7 +11,6 @@ export default function Mytrip() {
     return (
         <>
             <MytripLayout>
-
                 <div className="py-12 ">
                     <div className="mx-24 flex flex-wrap justify-between items-center ">
                         <h1 className=" text-4xl  tracking-tight font-semibold text-black ">My Trip</h1>
@@ -115,29 +113,23 @@ export default function Mytrip() {
                                         <option value="Khaoyai">Khaoyai</option>
                                     </select>
                                 </div>
-
+                                
                                 <div className=" col-span-2">
                                     <label htmlFor="startdate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Duration</label>
                                     <div className="flex items-center">
-                                        <div className=" relative">
-
+                                    
+                                        {/* <div className=" relative">
                                             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                                 <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                                                 </svg>
                                             </div>
-
                                             <input name="start" type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start" />
-                                        </div>
+                                            
+                                        </div> */}
+                                        <Datepicker/>
                                         <span className="mx-4 text-gray-500">to</span>
-                                        <div className="relative">
-                                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                                                </svg>
-                                            </div>
-                                            <input name="end" type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end" />
-                                        </div>
+                                        <Datepicker/>
                                     </div>
                                 </div>
                                 <div className="row-span-3 col-span-12">
