@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function NoPage() {
     return (
         <main className="grid min-h-full place-items-center bg-white ">
-            <div className="py-8 px-4 mx-auto  max-w-screen-sm lg:py-16 lg:px-6 text-center ">
+            <div className="py-8 px-4 mx-auto  max-w-screen-sm lg:py-16 lg:px-0 text-center ">
                 <svg xmlns="http://www.w3.org/2000/svg" href="http://www.w3.org/1999/xlink" className=" w-60 mx-auto" viewBox="0 0 462 432" fill="none">
                     <rect width="462" height="432" fill="url(#pattern0)" />
                     <defs>
