@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { db, } from "../firebase";
-import { collection, addDoc } from "firebase/firestore";
-
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function Footer() {
+
+    // alert state for displaying the success message
+    const [showAlert, setShowAlert] = useState(false);
+
     // contact form state 
     const [contactEmail, setContactEmail] = useState("");
     const [contactDescription, setContactDescription] = useState("");
@@ -15,10 +18,14 @@ export default function Footer() {
 
         try {
             await addDoc(contactCollectionRef, {
+                timestamp: serverTimestamp(),
                 contact_email: contactEmail,
                 contact_description: contactDescription,
             });
-            alert('Your message has been sent successfully!');
+            setShowAlert(true);
+            setTimeout(() => {
+                setShowAlert(false);
+            }, 3000);
         } catch (error) {
             console.error("Error adding document: ", error);
         }
@@ -78,17 +85,20 @@ export default function Footer() {
                 </div>
                 <div className="min-w-60  lg:min-w-96 ">
                     {/* <p className="mb-4 lg:mb-16 text-3xl font-semibold tracking-tight leading-tight text-white  md:text-4xl">Say hello and<br /> let's work together !</p> */}
-
-                    <form onSubmit={onSubmitContact}   className="max-w-md mx-auto mt-10 sm:mt-0 ">
+                    <form onSubmit={onSubmitContact} className="max-w-md mx-auto mt-10 sm:mt-0 ">
                         <div className="relative mb-4">
-                            <input type="email" onChange={(e) => setContactEmail(e.target.value)} id="contact-email" className="block px-5 py-3.5 w-full text-sm text-white bg-transparent rounded-full border-1 border-white appearance-none   focus:outline-none focus:ring-0 focus:border-[#98DB2E] peer" placeholder=" " />
+                            <input type="email" onChange={(e) => setContactEmail(e.target.value)} id="contact-email" className="block px-5 py-3.5 w-full text-sm text-white bg-transparent rounded-full border-1 border-white appearance-none   focus:outline-none focus:ring-0 focus:border-[#98DB2E] peer" placeholder=" " required />
                             <label htmlFor="contact-email" className="absolute text-sm  text-white  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-black  px-2 peer-focus:px-2 peer-focus:text-[#98DB2E]  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-4">Your email address</label>
                         </div>
                         <div className="relative mb-4">
                             <textarea rows={3} onChange={(e) => setContactDescription(e.target.value)} id="contact-description" className="block px-5 py-3.5 w-full text-sm text-white bg-transparent rounded-3xl border-1 border-white appearance-none dark:text-white dark:border-gray-600  focus:outline-none focus:ring-0 focus:border-[#98DB2E] peer" placeholder=" " />
                             <label htmlFor="contact-description" className="absolute text-sm  text-white  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-black  px-2 peer-focus:px-2 peer-focus:text-[#98DB2E]  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-4">Describe something</label>
                         </div>
-
+                        {showAlert && (
+                            <h1 className="mb-4 text-red-500 inset-x-0 top-0 " >
+                                Your message has been sent successfully!
+                            </h1>
+                        )}
                         <button type="submit" className="text-black bg-[#98DB2E]  hover:bg-[#99db2eca]   font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3.5  text-center ">Submit</button>
                     </form>
 
