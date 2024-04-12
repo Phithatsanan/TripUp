@@ -3,11 +3,12 @@ import Explore from "./pages/Explore";
 import Discover from "./pages/Discover";
 import Destination from "./pages/Destination";
 import Mytrip from "./pages/Mytrip";
+import Manage from "./pages/Manage";
+import Edit from "./pages/Edit";
+
 import NoPage from "./pages/NoPage";
 
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Manage from "./pages/Manage";
 
 
 export default function App() {
@@ -15,11 +16,11 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route index element={<Home/>} />
         <Route path="/explore" element={<Explore/>} />
         <Route path="/discover" element={<Discover />} />
         <Route path="/destination" element={<Destination />} />
-        <Route path="/mytrip" element={<Mytrip />} />
+        
 
         <Route path="/destination/:city" element={<Destination />} />
         <Route path="/destination/:city/:adventure" element={<Destination />} />
@@ -30,6 +31,8 @@ export default function App() {
 
         <Route path="/mytrip" element={<Mytrip />} />
         <Route path="/manage" element={<Manage />} />
+        <Route path="/manage/:trip" element={<Manage />} />
+        <Route path="/edit" element={<Edit />} />
         
         <Route path="*" element={<NoPage />} />
         {/* Add more routes as needed */}
