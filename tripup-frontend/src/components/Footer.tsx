@@ -11,8 +11,10 @@ export default function Footer() {
     const [contactEmail, setContactEmail] = useState("");
     const [contactDescription, setContactDescription] = useState("");
 
+    // firestore collection reference
     const contactCollectionRef = collection(db, "Contact");
 
+    // function to submit the contact form data to Firestore database 
     const onSubmitContact = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
@@ -95,7 +97,7 @@ export default function Footer() {
                             <label htmlFor="contact-description" className="absolute text-sm  text-white  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-black  px-2 peer-focus:px-2 peer-focus:text-[#98DB2E]  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-4">Describe something</label>
                         </div>
                         {showAlert && (
-                            <h1 className="mb-4 text-red-500 inset-x-0 top-0 " >
+                            <h1 className="mb-4 text-white inset-x-0 top-0 " >
                                 Your message has been sent successfully!
                             </h1>
                         )}
