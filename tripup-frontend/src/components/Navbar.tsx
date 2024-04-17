@@ -149,13 +149,11 @@ export default function Navbar() {
                                                         <Menu.Button className="relative flex gap-3 items-center rounded-xl text-white max-w-xs border  p-2 border-gray-600 hover:border-white   md:mr-0 text-sm ">
                                                             <span className="absolute -inset-1.5" />
                                                             <span className="sr-only">Open user menu</span>
-                                                            <img className="h-8 w-8 rounded-lg" src={uuser.imageUrl} alt="" />{uuser.name}
+                                                            <img className="h-8 w-8 rounded-lg" src={user.photoURL || ''} alt="" />{user.displayName}
                                                         </Menu.Button>
                                                     ) : (
                                                         <button onClick={() => setOpenLogin(true)} className="text-gray-800 bg-[#98DB2E] dark:text-white  hover:bg-[#99db2eca]  font-medium rounded-lg text-sm px-4 lg:px-5 py-3.5 lg:py-2.5 lg:my-1 mr-2 dark:hover:bg-gray-700 ">Sign in</button>
                                                     )}
-
-
                                                 </div>
                                                 <Transition
                                                     as={Fragment}
@@ -409,21 +407,24 @@ export default function Navbar() {
                     <Modal.Body className="mx-5">
                         <div className='mb-10 '>
                             <h1 className='text-3xl font-semibold'>
-                                Hi, {uuser.name}
+                                Hi, {user?.displayName}
                             </h1>
+                            <p className='mt-2 text-xl text-gray-500 dark:text-gray-400'>
+                                {user?.email}
+                            </p>
                         </div>
                         <form action="#">
                             <div className="flex gap-10 ">
                                 <div className=" ">
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Name</label>
-                                    <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Profile name" />
+                                    <input type="text" name="name" value={user?.displayName || ""}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Profile name" />
                                 </div>
 
                                 <div className=" items-center content-center space-y-4 ">
                                     <div className="flex items-center justify-center w-full ">
                                         <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center   cursor-pointer   ">
                                             <div className=" text-center text-gray-500 dark:text-gray-400 hover:brightness-50">
-                                                <img className="mx-auto ring-1 ring-gray-300 w-52 h-52 rounded-2xl" src="https://www.survivorsuk.org/wp-content/uploads/2017/01/no-image.jpg" alt="" />
+                                                <img className="mx-auto ring-1 ring-gray-300 w-52 h-52 rounded-2xl" src={user?.photoURL || ""} alt="" />
                                             </div>
                                             <input id="dropzone-file" type="file" className="hidden" />
                                         </label>
