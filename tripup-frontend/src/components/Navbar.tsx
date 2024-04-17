@@ -10,13 +10,6 @@ import { auth, provider } from '../firebase';
 import { User, signInWithPopup, signOut } from "firebase/auth";
 
 
-const uuser = {
-    name: 'Kittitat Songsakseree',
-    email: 'kittitater@gmail.com',
-    imageUrl:
-        'https://avatars.githubusercontent.com/u/71830543?v=4',
-}
-
 export default function Navbar() {
 
     const [user, setUser] = useState<User | null>(null);
