@@ -212,10 +212,10 @@ export default function Navbar() {
 
                                             <div className="flex items-center">
                                                 <div className="flex-shrink-0">
-                                                    <img className="h-14 w-14 rounded-xl" src={uuser.imageUrl} alt="" />
+                                                    <img className="h-14 w-14 rounded-xl" src={user.photoURL || ""} alt="" />
                                                 </div>
                                                 <div className="ml-3 space-y-1">
-                                                    <div className="text-base font-medium leading-none text-white">{uuser.name}</div>
+                                                    <div className="text-base font-medium leading-none text-white">{user.displayName}</div>
                                                     {/* <div className="text-sm font-medium leading-none text-gray-400">{uuser.email}</div> */}
                                                 </div>
                                             </div>
