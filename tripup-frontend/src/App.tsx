@@ -6,38 +6,83 @@ import Mytrip from "./pages/Mytrip";
 import Manage from "./pages/Manage";
 import Edit from "./pages/Edit";
 
+import AuthContext from "./auth/authcontext";
+import ProtectedRoute from "./auth/ProtectedRoute";
+
 import NoPage from "./pages/NoPage";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 export default function App() {
 
+  // const router = createBrowserRouter([
+  //   {
+  //     path: "/",
+  //     element: <Home />
+  //   },
+  //   {
+  //     path: "/discover",
+  //     element: <Discover />
+  //   },
+  //   {
+  //     path: "/explore",
+  //     element: <Explore />
+  //   },
+  //   {
+  //     path: "/destination/:city_name",
+  //     element: <Destination />
+  //   },
+  //   {
+  //     path: "/mytrip",
+  //     element: <ProtectedRoute><Mytrip /></ProtectedRoute>
+  //   },
+  //   {
+  //     path: "/mytrip/:trip_id",
+  //     element: <Protected><Manage /></Protected>
+  //   },
+  //   {
+  //     path: "/edit",
+  //     element: <Protected><Edit /></Protected>
+  //   },
+
+  //   {
+  //     path: "*",
+  //     element: <NoPage />
+  //   },
+
+  // ])
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<Home/>} />
-        <Route path="/explore" element={<Explore/>} />
-        <Route path="/discover" element={<Discover />} />
-        <Route path="/destination" element={<Destination />} />
-        
+    <AuthContext>
+      <BrowserRouter>
+        <Routes>
 
-        <Route path="/destination/:city" element={<Destination />} />
-        <Route path="/destination/:city/:adventure" element={<Destination />} />
-        <Route path="/destination/:city/:leisure" element={<Destination />} />
-        <Route path="/destination/:city/:entertainment" element={<Destination />} />
-        <Route path="/destination/:city/:family" element={<Destination />} />
-        <Route path="/destination/:city/:food" element={<Destination />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/discover" element={<Discover />} />
+          <Route path="/explore" element={<Explore />} />
 
-        <Route path="/mytrip" element={<Mytrip />} />
-        <Route path="/manage" element={<Manage />} />
-        <Route path="/manage/:trip" element={<Manage />} />
-        <Route path="/edit" element={<Edit />} />
-        
-        <Route path="*" element={<NoPage />} />
-        {/* Add more routes as needed */}
-      </Routes>
-    </BrowserRouter>
+          <Route path="/destination" element={<Destination />} />
+
+          <Route path="/destination/:city" element={<Destination />} />
+          <Route path="/destination/:city/:adventure" element={<Destination />} />
+          <Route path="/destination/:city/:leisure" element={<Destination />} />
+          <Route path="/destination/:city/:entertainment" element={<Destination />} />
+          <Route path="/destination/:city/:family" element={<Destination />} />
+          <Route path="/destination/:city/:food" element={<Destination />} />
+
+          <Route path="/mytrip" element={<ProtectedRoute><Mytrip /></ProtectedRoute>} />
+          <Route path="/mytrip/:trip_id" element={<ProtectedRoute><Manage /></ProtectedRoute>} />
+          <Route path="/edit" element={<ProtectedRoute><Edit /></ProtectedRoute>} />
+
+          <Route path="*" element={<NoPage />} />
+          {/* Add more routes as needed */}
+        </Routes>
+      </BrowserRouter>
+    </AuthContext>
+
+    // <AuthContext>
+    //   <RouterProvider router={router}></RouterProvider>
+    // </AuthContext>
   );
 }
-

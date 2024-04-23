@@ -370,6 +370,7 @@ export default function Navbar() {
                     )}
                 </Disclosure>
 
+                {/* login modal */}
                 <Modal show={openLogin} className='bg-black' size="sm" position="center" onClose={() => setOpenLogin(false)} popup dismissible>
                     <Modal.Header ></Modal.Header>
                     <Modal.Body>
@@ -392,7 +393,7 @@ export default function Navbar() {
                     </Modal.Body>
                 </Modal>
 
-
+                {/* setting modal */}
                 <Modal dismissible show={openProfile} className='bg-black ' size="3xl" position="center" onClose={() => setOpenProfile(false)} >
                     <Modal.Header className="py-5 px-10 ">
                         <h1 className="text-3xl font-medium">Profile</h1>
@@ -410,7 +411,7 @@ export default function Navbar() {
                             <div className="flex gap-10 ">
                                 <div className=" ">
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Name</label>
-                                    <input type="text" name="name" value={user?.displayName || ""}  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Profile name" />
+                                    <input type="text" name="name"  value={user?.displayName || ""} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Profile name" />
                                 </div>
 
                                 <div className=" items-center content-center space-y-4 ">
@@ -430,10 +431,6 @@ export default function Navbar() {
                                 <button onClick={() => setOpenProfile(false)} className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100  dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
                             </div>
                         </form>
-
-
-
-
                     </Modal.Body>
                 </Modal>
             </div >
