@@ -21,8 +21,8 @@ export default function Footer() {
         try {
             await addDoc(contactCollectionRef, {
                 timestamp: serverTimestamp(),
-                contact_email: contactEmail,
                 contact_description: contactDescription,
+                contact_email: contactEmail,
             });
             setShowAlert(true);
             setTimeout(() => {

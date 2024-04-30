@@ -8,6 +8,8 @@ import { auth, provider } from '../firebase';
 import { User, signInWithPopup } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 
+
+
 import Layout from './Layout';
 
 export default function Home() {

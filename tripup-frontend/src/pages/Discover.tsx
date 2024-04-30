@@ -22,7 +22,7 @@ export default function Discover() {
           city_id: doc.id,
           ...doc.data(),
         })) as CityType[];
-        setAllCities(citiesData);
+        setAllCities(citiesData)
       } catch (error) {
         console.error("Error fetching cities:", error);
       }
@@ -44,6 +44,8 @@ export default function Discover() {
   return (
     <>
       <Layout>
+
+        {/* Search bar */}
         <section className="bg-white dark:bg-gray-900">
           <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-12 lg:px-6">
             <div className="mx-auto max-w-screen-sm text-center mb-8 lg:mb-0">
@@ -61,16 +63,17 @@ export default function Discover() {
           </div>
         </section>
 
+        {/* Popular city to explore */}
         <div className="py-16 bg-black">
           <h1 className="mb-5 mx-10 md:mx-24 text-2xl md:text-3xl text-center tracking-tight font-medium text-white">
             {searchTerm ? `Results for "${searchTerm}"` : "Popular Cities to Explore"}
           </h1>
           {/* Set a max-height for the container to fit two rows and allow horizontal scrolling */}
           <div className="overflow-x-auto py-10 px-10">
-            <div className="grid grid-rows-1 grid-flow-col gap-8 mx-0">
+            <div className="flex flex-nowrap gap-8 mx-0">
               {filteredCities.length > 0 ? (
                 filteredCities.map((city) => (
-                  <div key={city.city_id} className="w-60 items-center hover:brightness-50">
+                  <div key={city.city_id} className=" min-w-max items-center hover:brightness-50">
                     <Link to={`/destination/${city.city_name}`} className="block">
                       <img
                         className="rounded-full w-60 h-40 object-cover"
@@ -84,14 +87,14 @@ export default function Discover() {
                   </div>
                 ))
               ) : (
-                <p className="text-white text-center w-full">No cities found. Try a different search.</p>
+                <p className="text-white text-center text-lg w-full">No cities found.</p>
               )}
             </div>
           </div>
         </div>
 
 
-
+        {/* best destinations to experience module */}
         <div className="py-16 ">
           <h1 className="mb-5 mx-10 md:mx-24 text-2xl md:text-3xl text-center tracking-tight font-medium text-black">Best Destinations to Experience</h1>
 

@@ -142,7 +142,7 @@ export default function Navbar() {
                                                         <Menu.Button className="relative flex gap-3 items-center rounded-xl text-white max-w-xs border  p-2 border-gray-600 hover:border-white   md:mr-0 text-sm ">
                                                             <span className="absolute -inset-1.5" />
                                                             <span className="sr-only">Open user menu</span>
-                                                            <img className="h-8 w-8 rounded-lg" src={user.photoURL || ''} alt="" />{user.displayName}
+                                                            <img className="h-8 w-8 rounded-lg" src={user.photoURL || '/src/assets/no-image.jpg'} alt="" />{user.displayName}
                                                         </Menu.Button>
                                                     ) : (
                                                         <button onClick={() => setOpenLogin(true)} className="text-gray-800 bg-[#98DB2E] dark:text-white  hover:bg-[#99db2eca]  font-medium rounded-lg text-sm px-4 lg:px-5 py-3.5 lg:py-2.5 lg:my-1 mr-2 dark:hover:bg-gray-700 ">Sign in</button>
@@ -212,8 +212,8 @@ export default function Navbar() {
                                                     {/* <div className="text-sm font-medium leading-none text-gray-400">{uuser.email}</div> */}
                                                 </div>
                                             </div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-9 h-9 text-white ">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-9 h-9 text-white ">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                             </svg>
 
                                         </Disclosure.Button>
@@ -302,8 +302,8 @@ export default function Navbar() {
                                                 className="flex justify-between items-center rounded-3xl my-3 mx-4 px-5 py-5 text-lg font-semibold text-white hover:ring-white ring-1 ring-gray-500"
                                             >
                                                 Sign In
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-9 h-9  ">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-9 h-9  ">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                                 </svg>
 
                                             </Disclosure.Button>
