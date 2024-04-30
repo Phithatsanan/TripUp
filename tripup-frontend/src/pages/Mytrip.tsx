@@ -322,7 +322,7 @@ export default function Mytrip() {
                                     <div className="flex items-center justify-center w-full ">
                                         <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center   cursor-pointer   ">
                                             <div className=" text-center text-gray-500 dark:text-gray-400 hover:brightness-50">
-                                                <img className="mx-auto ring-1 ring-gray-300 w-auto h-52 rounded-2xl" src={imagePreview || '/src/assets/no-image.jpg'} alt="" />
+                                                <img className="mx-auto ring-1 ring-gray-300 w-auto h-52 rounded-2xl" src={imagePreview || '../src/assets/no-image.jpg'} alt="" />
 
                                             </div>
                                             <input id="dropzone-file" type="file" onChange={onImageChange} className="hidden" />
