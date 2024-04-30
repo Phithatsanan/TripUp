@@ -24,7 +24,7 @@ export default function Mytrip() {
     const [tripName, setTripName] = useState('');
     const [tripDestination, setTripDestination] = useState('');
 
-    const [trip, setTrip] = useState([]);
+    const [trip, setTrip] = useState<any[]>([]);
 
     // File Upload State
     const [imagePreview, setImagePreview] = useState('');
@@ -38,7 +38,7 @@ export default function Mytrip() {
         }
     };
 
-    const { currentUser } = useContext(Context) as unknown as { currentUser: any };
+    const { user } = useContext(Context) as unknown as { user: any };
 
     // These states are used for the edit and delete buttons
     //const [editTrip, setEditTrip] = useState(false);
@@ -47,10 +47,12 @@ export default function Mytrip() {
     async function onSubmitAddNewTrip(event: React.FormEvent) {
         event.preventDefault(); // Prevent default form submission
 
-        if (!currentUser) {
+        if (!user) {
             console.error("User not authenticated."); // Log error if user is not authenticated
             setOpenModal(false);
             return;
+        } else {
+            console.log(user);
         }
 
         try {
@@ -66,7 +68,7 @@ export default function Mytrip() {
 
             const newTrip = {
                 trip_id: uuidv4(),
-                user_id: currentUser.uid,
+                user_id: user.uid,
                 trip_name: tripName,
                 trip_destination: tripDestination,
                 start_date: startDate,
@@ -108,20 +110,20 @@ export default function Mytrip() {
     //         console.error(err);
     //     }
     // }
-    useEffect(() => {
-        try {
-            if (currentUser) {
-                console.log(currentUser);
-                const data = query(tripColletionRef, where('user_id', '==', currentUser.uid));
-                // Fetch data from Firestore only if the user is authenticated
-                const unsubscribe = onSnapshot(data, snapshot => {
-                    const fetchedTrip = snapshot.docs.map((doc) => ({
 
+    async function getTrip() {
+        try {
+            if (user) {
+                const data = query(tripColletionRef, where('user_id', '==', user.uid));
+                // Fetch data from Firestore only if the user is authenticated
+                const unsubscribe = onSnapshot(data, querysnapshot => {
+                    const fetchedTrip = querysnapshot.docs.map((doc) => ({
                         id: doc.id,
                         ...doc.data()
                     }));
-                    setTrip(fetchedTrip);
+                    setTrip(fetchedTrip); // Update the type of the trip state
                     console.log(fetchedTrip);
+                    console.log(trip);
                 });
 
                 // Cleanup subscription
@@ -130,6 +132,10 @@ export default function Mytrip() {
         } catch (err) {
             console.error(err);
         }
+    }
+
+    useEffect(() => {
+        getTrip()
     }, []);
 
 
@@ -155,26 +161,18 @@ export default function Mytrip() {
                     <div className=" py-12 px-10 md:px-32">
                         <div className=" grid grid-cols-1 gap-8 mx-0 ">
 
-                            {trip.map(trip => (
+                            {trip.map((trip) => (
                                 <Link key={trip.id} to={`/mytrip/${trip.id}`} className="flex flex-col items-center justify-between bg-white border-2 border-gray-300 rounded-3xl md:flex-row md:max-w-full hover:shadow-lg hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                                     <div className="bg-clip-border flex flex-col px-12 py-6 leading-normal">
-                                        <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">{trip.name}</h5>
+                                        <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">{trip.trip_name}</h5>
                                         <h5 className="mb-2 text-lg text-left font-medium tracking-tight text-gray-900 dark:text-white">
-                                            {trip.location}</h5>
-                                        <h5 className="mb-0 text-md text-left font-normal tracking-tight text-gray-900 dark:text-white">{trip.date}</h5>
+                                            {trip.trip_destination}</h5>
+                                        <h5 className="mb-0 text-md text-left font-normal tracking-tight text-gray-900 dark:text-white">{trip.start_date} - {trip.end_date}</h5>
                                     </div>
-                                    <img className="h-72 md:h-44 md:w-auto md:rounded-none md:rounded-r-3xl" src={trip.image} alt="" />
+                                    <img className="h-72 md:h-44 md:w-auto md:rounded-none md:rounded-r-3xl" src={trip.trip_image} alt="" />
                                 </Link>
                             ))}
 
-                            {/* <Link to={"/mytrip/manage"} className="flex flex-col items-center justify-between bg-white border-2 border-gray-300 rounded-3xl  md:flex-row md:max-w-full hover:shadow-lg hover:bg-gray-100  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                <div className="bg-clip-border flex flex-col px-12 py-6 leading-normal">
-                                    <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">Trip 1</h5>
-                                    <h5 className="mb-2 text-lg text-left font-medium tracking-tight text-gray-900 dark:text-white">Bangkok, Thailand</h5>
-                                    <h5 className="mb-0 text-md text-left font-normal tracking-tight text-gray-900 dark:text-white">Mar 5 - 9, 2024 (5 days)</h5>
-                                </div>
-                                <img className="  h-72 md:h-44 md:w-auto md:rounded-none md:rounded-r-3xl " src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/09/44/69/ba.jpg" alt="" />
-                            </Link> */}
 
 
 
