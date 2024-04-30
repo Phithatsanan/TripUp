@@ -1,16 +1,137 @@
 
 import MytripLayout from "./Mytrip-Layout";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Modal, Datepicker } from "flowbite-react";
+import { Modal, Alert } from "flowbite-react";
+import { collection, doc, setDoc, serverTimestamp, query, where, onSnapshot, } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, storage } from "../firebase";
+
+
+
+//import { auth } from "../firebase";
+import { Context } from "../auth/authcontext";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Mytrip() {
     const [openModal, setOpenModal] = useState(false);
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const emailInputRef = useRef<HTMLInputElement>(null);
+
+    const tripColletionRef = collection(db, 'Trip');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [tripName, setTripName] = useState('');
+    const [tripDestination, setTripDestination] = useState('');
+
+    const [trip, setTrip] = useState([]);
+
+    // File Upload State
+    const [imagePreview, setImagePreview] = useState('');
+    const [imageUpload, setImageUpload] = useState<File | null>(null);
+
+    async function onImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+        if (e.target.files && e.target.files[0]) {
+            const selectedImage = e.target.files[0];
+            setImagePreview(URL.createObjectURL(selectedImage));
+            setImageUpload(selectedImage);
+        }
+    };
+
+    const { currentUser } = useContext(Context) as unknown as { currentUser: any };
 
     // These states are used for the edit and delete buttons
     //const [editTrip, setEditTrip] = useState(false);
     //const [deleteTrip, setDeleteTrip] = useState(false);
+
+    async function onSubmitAddNewTrip(event: React.FormEvent) {
+        event.preventDefault(); // Prevent default form submission
+
+        if (!currentUser) {
+            console.error("User not authenticated."); // Log error if user is not authenticated
+            setOpenModal(false);
+            return;
+        }
+
+        try {
+            let imageURL = ''; // Initialize imageURL variable
+
+            if (imageUpload) {
+
+                const imageFolderRef = ref(storage, `tripImageFile/${(imageUpload as File).name}`);
+                await uploadBytes(imageFolderRef, imageUpload);
+
+                imageURL = await getDownloadURL(imageFolderRef); // Get the URL of the uploaded image
+            }
+
+            const newTrip = {
+                trip_id: uuidv4(),
+                user_id: currentUser.uid,
+                trip_name: tripName,
+                trip_destination: tripDestination,
+                start_date: startDate,
+                end_date: endDate,
+                trip_image: imageURL, // Add imageURL to the newTrip object
+                createdAt: serverTimestamp(),
+                lastUpdate: serverTimestamp(),
+            };
+
+            const newTripRef = doc(tripColletionRef, newTrip.trip_id);
+            await setDoc(newTripRef, newTrip);
+            setOpenModal(false);
+            setShowSuccessAlert(true);
+            setTimeout(() => {
+                setShowSuccessAlert(false);
+            }, 5000);
+        } catch (error) {
+            console.error("Error adding trip:", error); // Log error if adding trip fails
+        }
+    }
+
+    // async function getTrip() {
+    //     try {
+    //         if (currentUser) {
+    //             const q = query(tripColletionRef, where('user_id', '==', currentUser.uid));
+    //             // Fetch data from Firestore only if the user is authenticated
+    //             const unsubscribe = onSnapshot(q, snapshot => {
+    //                 const fetchedTrip = snapshot.docs.map(doc => ({
+    //                     id: doc.id,
+    //                     ...doc.data()
+    //                 }));
+    //                 setTrip(fetchedTrip);
+    //             });
+
+    //             // Cleanup subscription
+    //             return () => unsubscribe();
+    //         }
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }
+    useEffect(() => {
+        try {
+            if (currentUser) {
+                console.log(currentUser);
+                const data = query(tripColletionRef, where('user_id', '==', currentUser.uid));
+                // Fetch data from Firestore only if the user is authenticated
+                const unsubscribe = onSnapshot(data, snapshot => {
+                    const fetchedTrip = snapshot.docs.map((doc) => ({
+
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+                    setTrip(fetchedTrip);
+                    console.log(fetchedTrip);
+                });
+
+                // Cleanup subscription
+                return () => unsubscribe();
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }, []);
+
 
     return (
         <>
@@ -18,9 +139,14 @@ export default function Mytrip() {
                 <div className="py-12 max-lg:hidden ">
                     <div className="mx-24 flex flex-wrap justify-between items-center ">
                         <h1 className=" text-4xl  tracking-tight font-semibold text-black ">My Trip</h1>
+                        {showSuccessAlert && (
+                            <Alert color="success" className=" absolute inset-x-72 top-30 rounded-xl " onDismiss={() => setShowSuccessAlert(false)}>
+                                <span className=" font-medium">Trip added successfully!</span>
+                            </Alert>
+                        )}
                         <button onClick={() => setOpenModal(true)} className="flex h-12 items-center  text-black bg-[#98DB2E] dark:text-white hover:bg-[#99db2eca] gap-2 font-medium rounded-xl text-sm px-5 py-2.5  ">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
 
                             New trip
@@ -29,38 +155,28 @@ export default function Mytrip() {
                     <div className=" py-12 px-10 md:px-32">
                         <div className=" grid grid-cols-1 gap-8 mx-0 ">
 
-                            <Link to={"/mytrip/manage"} className="flex flex-col items-center justify-between bg-white border-2 border-gray-300 rounded-3xl  md:flex-row md:max-w-full hover:shadow-lg hover:bg-gray-100  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                <div className="bg-clip-border flex flex-col px-12 py-6 leading-normal">
-                                    <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">Trip 1</h5>
-                                    <h5 className="mb-2 text-lg text-left font-medium tracking-tight text-gray-900 dark:text-white">Bangkok, Thailand</h5>
-                                    <h5 className="mb-0 text-md text-left font-normal tracking-tight text-gray-900 dark:text-white">Mar 5 - 9, 2024 (5 days)</h5>
-                                </div>
-                                <img className="  h-72 md:h-44 md:w-auto md:rounded-none md:rounded-r-3xl " src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/09/44/69/ba.jpg" alt="" />
-                            </Link>
-
-                            <Link to={"/manage"} className="flex flex-col items-center justify-between bg-white border-2 border-gray-300 rounded-3xl  md:flex-row md:max-w-full hover:shadow-lg hover:bg-gray-100  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                                <div className="bg-clip-border flex flex-col px-12 py-6 leading-normal">
-                                    <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">Trip 1</h5>
-                                    <h5 className="mb-2 text-lg text-left font-medium tracking-tight text-gray-900 dark:text-white">Bangkok, Thailand</h5>
-                                    <h5 className="mb-0 text-md text-left font-normal tracking-tight text-gray-900 dark:text-white">Mar 5 - 9, 2024 (5 days)</h5>
-                                    <div className="flex gap-2">
-                                        {/* <button onClick={() => setOpenModal(true)} className="flex items-center text-gray-800 bg-[#98DB2E] dark:text-white hover:bg-[#99db2eca]  font-medium rounded-lg text-sm w-30 px-4 lg:px-3.5 py-3.5 lg:py-2 mr-2 dark:hover:bg-gray-700 ">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 me-2.5">
-                                                <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
-                                                <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
-                                            </svg>
-                                            Edit Trip
-                                        </button>
-                                        <button onClick={() => setOpenModal(true)} className="flex items-center text-white bg-red-600 dark:text-white hover:bg-red-500  font-medium rounded-lg text-sm w-30 px-4 lg:px-3.5 py-3.5 lg:py-2 mr-2 dark:hover:bg-gray-700 ">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 me-2.5">
-                                                <path fill-ƒrule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
-                                            </svg>
-                                            Delete Trip
-                                        </button> */}
+                            {trip.map(trip => (
+                                <Link key={trip.id} to={`/mytrip/${trip.id}`} className="flex flex-col items-center justify-between bg-white border-2 border-gray-300 rounded-3xl md:flex-row md:max-w-full hover:shadow-lg hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                    <div className="bg-clip-border flex flex-col px-12 py-6 leading-normal">
+                                        <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">{trip.name}</h5>
+                                        <h5 className="mb-2 text-lg text-left font-medium tracking-tight text-gray-900 dark:text-white">
+                                            {trip.location}</h5>
+                                        <h5 className="mb-0 text-md text-left font-normal tracking-tight text-gray-900 dark:text-white">{trip.date}</h5>
                                     </div>
+                                    <img className="h-72 md:h-44 md:w-auto md:rounded-none md:rounded-r-3xl" src={trip.image} alt="" />
+                                </Link>
+                            ))}
+
+                            {/* <Link to={"/mytrip/manage"} className="flex flex-col items-center justify-between bg-white border-2 border-gray-300 rounded-3xl  md:flex-row md:max-w-full hover:shadow-lg hover:bg-gray-100  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                <div className="bg-clip-border flex flex-col px-12 py-6 leading-normal">
+                                    <h5 className="mb-2 text-3xl text-left font-semibold tracking-tight text-gray-900 dark:text-white">Trip 1</h5>
+                                    <h5 className="mb-2 text-lg text-left font-medium tracking-tight text-gray-900 dark:text-white">Bangkok, Thailand</h5>
+                                    <h5 className="mb-0 text-md text-left font-normal tracking-tight text-gray-900 dark:text-white">Mar 5 - 9, 2024 (5 days)</h5>
                                 </div>
                                 <img className="  h-72 md:h-44 md:w-auto md:rounded-none md:rounded-r-3xl " src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/09/44/69/ba.jpg" alt="" />
-                            </Link>
+                            </Link> */}
+
+
 
                             {/* <div className="flex flex-col items-center justify-between bg-white border-2 border-gray-300 rounded-3xl  md:flex-row md:max-w-full   dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                                 <div className="bg-clip-border flex flex-col px-12 py-6 leading-normal">
@@ -97,39 +213,17 @@ export default function Mytrip() {
 
                             </div> */}
 
+
+                            {/* Page navigation and load more data */}
                             <nav aria-label="Page navigation example">
                                 <ul className="flex items-center -space-x-px h-8 text-sm">
+
+
                                     <li>
-                                        <a href="#" className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                            <span className="sr-only">Previous</span>
-                                            <svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
-                                            </svg>
-                                        </a>
+                                        <a href="#" className="rounded-xl  flex items-center justify-center px-5 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-black dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Load more</a>
                                     </li>
-                                    <li>
-                                        <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-black dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-black dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" aria-current="page" className="z-10 flex items-center justify-center px-3 h-8 leading-tight text-[#98DB2E] border border-[#98DB2E] bg-[#98DB2E] bg-opacity-20 hover:bg-[#98DB2E] hover:bg-opacity-10 hover:text-[#98DB2E] dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-black dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-black dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-black dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                            <span className="sr-only">Next</span>
-                                            <svg className="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
-                                            </svg>
-                                        </a>
-                                    </li>
+
+
                                 </ul>
                             </nav>
 
@@ -139,6 +233,7 @@ export default function Mytrip() {
                     </div>
                 </div>
 
+                {/* Mobile unavailable prompt */}
                 <section className="xl:hidden bg-white dark:bg-gray-900 py-8">
                     <div className="py-8 px-4 mx-auto  max-w-screen-xl lg:py-16 lg:px-6 ">
                         <div></div>
@@ -158,21 +253,22 @@ export default function Mytrip() {
                     </div>
                 </section>
 
+                {/* Add new trip modal */}
                 <Modal dismissible show={openModal} className='bg-black ' size="4xl" position="center" onClose={() => setOpenModal(false)} initialFocus={emailInputRef}>
                     <Modal.Header className="py-5 px-10 ">
                         <h1 className="text-3xl font-medium">New Trip</h1>
                     </Modal.Header>
                     <Modal.Body className="mx-5">
-                        <form action="#">
+                        <form onSubmit={onSubmitAddNewTrip}>
                             <div className="grid grid-rows-3 grid-flow-col gap-5 ">
                                 <div className=" col-span-2">
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Name</label>
-                                    <input type="text" name="name" id="name" ref={emailInputRef} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter trip name" />
+                                    <input type="text" name="name" id="name" ref={emailInputRef} onChange={(e) => setTripName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter trip name" />
                                 </div>
                                 <div className=" col-span-2">
                                     <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Destination</label>
-                                    <select id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option selected>Select destination city</option>
+                                    <select id="category" onChange={(e) => setTripDestination(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                        <option defaultValue="Select destination city">Select destination city</option>
                                         <option value="Bangkok">Bangkok</option>
                                         <option value="Phuket">Phuket</option>
                                         <option value="Chiangmai">Chiangmai</option>
@@ -180,11 +276,11 @@ export default function Mytrip() {
                                     </select>
                                 </div>
 
-                                <div className=" col-span-2">
+                                {/* <div className=" col-span-2">
                                     <label htmlFor="startdate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Duration</label>
                                     <div className="flex items-center">
 
-                                        {/* <div className=" relative">
+                                        <div className=" relative">
                                             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                                 <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
@@ -192,22 +288,53 @@ export default function Mytrip() {
                                             </div>
                                             <input name="start" type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start" />
                                             
-                                        </div> */}
+                                        </div>
                                         <Datepicker className="focus:ring-[#98DB2E] focus:border-[#98DB2E] block" />
                                         <span className="mx-4 text-gray-500">to</span>
                                         <Datepicker />
                                     </div>
+                                </div> */}
+
+                                <div className="col-span-2">
+
+
+                                    <label htmlFor="startdate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Duration <span className=" font-light text-xs text-red-600">[Fill in date as following format DD/MM/YYYY]</span></label>
+                                    <div date-rangepicker="true" className="flex items-center ">
+                                        <div className="relative">
+                                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                                </svg>
+                                            </div>
+                                            <input name="start" type="text" onChange={(e) => setStartDate(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start" />
+                                        </div>
+                                        <span className="mx-4 text-gray-500">to</span>
+                                        <div className="relative">
+                                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                                </svg>
+                                            </div>
+                                            <input name="end" type="text" onChange={(e) => setEndDate(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end" />
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div className="row-span-3 col-span-12 items-center content-center space-y-4 ">
                                     <div className="flex items-center justify-center w-full ">
                                         <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center   cursor-pointer   ">
                                             <div className=" text-center text-gray-500 dark:text-gray-400 hover:brightness-50">
-                                                <img className="mx-auto ring-1 ring-gray-300 w-auto h-52 rounded-2xl" src="https://www.survivorsuk.org/wp-content/uploads/2017/01/no-image.jpg" alt="" />
+                                                <img className="mx-auto ring-1 ring-gray-300 w-auto h-52 rounded-2xl" src={imagePreview || '/src/assets/no-image.jpg'} alt="" />
+
                                             </div>
-                                            <input id="dropzone-file" type="file" className="hidden" />
+                                            <input id="dropzone-file" type="file" onChange={onImageChange} className="hidden" />
+                                            {/* <button onClick={uploadTripImage} className="absolute bottom-28 text-black bg-[#98DB2E] hover:bg-[#99db2eca] font-normal rounded-lg text-xs px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Change</button> */}
                                         </label>
+
                                     </div>
+
                                 </div>
+
 
                             </div>
                             <div className="flex items-center mt-10  border-gray-200  dark:border-gray-600">
