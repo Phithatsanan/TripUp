@@ -64,12 +64,12 @@ export default function App() {
 
           <Route path="/destination" element={<Destination />} />
 
-          <Route path="/destination/:city" element={<Destination />} />
-          <Route path="/destination/:city/:adventure" element={<Destination />} />
-          <Route path="/destination/:city/:leisure" element={<Destination />} />
-          <Route path="/destination/:city/:entertainment" element={<Destination />} />
-          <Route path="/destination/:city/:family" element={<Destination />} />
-          <Route path="/destination/:city/:food" element={<Destination />} />
+          <Route path="/discover/:city_id" element={<Destination />} />
+          <Route path="/discover/:city_id/:adventure" element={<Destination />} />
+          <Route path="/discover/:city_id/:leisure" element={<Destination />} />
+          <Route path="/discover/:city_id/:entertainment" element={<Destination />} />
+          <Route path="/discover/:city_id/:family" element={<Destination />} />
+          <Route path="/discover/:city_id/:food" element={<Destination />} />
 
           <Route path="/mytrip" element={<ProtectedRoute><Mytrip /></ProtectedRoute>} />
           <Route path="/mytrip/:trip_id" element={<ProtectedRoute><Manage /></ProtectedRoute>} />

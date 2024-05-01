@@ -411,7 +411,7 @@ export default function Navbar() {
                             <div className="flex gap-10 ">
                                 <div className=" ">
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Name</label>
-                                    <input type="text" name="name"  value={user?.displayName || ""} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Profile name" />
+                                    <input type="text" name="name"  defaultValue={user?.displayName || ""} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-96 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Profile name" />
                                 </div>
 
                                 <div className=" items-center content-center space-y-4 ">

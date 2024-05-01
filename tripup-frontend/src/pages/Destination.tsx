@@ -1,7 +1,10 @@
 import Layout from "./Layout";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useState, useEffect } from "react";
 import { Modal } from 'flowbite-react';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
+import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase";
 
 
 export default function Destination() {
@@ -11,56 +14,95 @@ export default function Destination() {
     const handleTabClick = (tab: SetStateAction<string>) => {
         setActiveTab(tab);
     };
+    const params = useParams();
+
+    const [city, setCity] = useState<any[]>([]);
+
+
+    async function getCity() {
+        try {
+
+            const cityColletionRef = collection(db, 'Cities');
+            const data = query(cityColletionRef, where('city_id', '==', params.city_id));
+            // Fetch data from Firestore only if the user is authenticated
+            const unsubscribe = onSnapshot(data, querysnapshot => {
+                const fetchedCity = querysnapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setCity(fetchedCity); // Update the type of the trip state
+                console.log(fetchedCity);
+                console.log(city);
+            });
+
+            // Cleanup subscription
+            return () => unsubscribe();
+
+        } catch (err) {
+            console.error("Error fetch city from Cities collection:", err);
+        }
+    }
+
+    useEffect(() => {
+        getCity()
+    }, []);
 
     return (
         <Layout>
 
-            <nav className="flex px-10 py-3 " aria-label="Breadcrumb">
-                <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                    <li className="inline-flex items-center">
-                        <Link to="/" className="inline-flex items-center text-sm font-medium text-black hover:text-[#98DB2E] dark:text-gray-400 dark:hover:text-white">
-                            <svg className="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
-                            </svg>
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-                        <div className="flex items-center">
-                            <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
-                            </svg>
-                            <Link to="/discover" className="ms-1 text-sm font-medium text-black hover:text-[#98DB2E] md:ms-2 dark:text-gray-400 dark:hover:text-white">Discover</Link>
-                        </div>
-                    </li>
-                    <li aria-current="page">
-                        <div className="flex items-center">
-                            <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
-                            </svg>
-                            <span className="ms-1 text-sm font-medium text-black md:ms-2 dark:text-gray-400">Bangkok</span>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
+            {city.map((city) => (
+                <>
+                    <nav className="flex px-10 py-3 " aria-label="Breadcrumb">
+                        <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                            <li className="inline-flex items-center">
+                                <Link to="/" className="inline-flex items-center text-sm font-medium text-black hover:text-[#98DB2E] dark:text-gray-400 dark:hover:text-white">
+                                    <svg className="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                                    </svg>
+                                    Home
+                                </Link>
+                            </li>
+                            <li>
+                                <div className="flex items-center">
+                                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+                                    </svg>
+                                    <Link to="/discover" className="ms-1 text-sm font-medium text-black hover:text-[#98DB2E] md:ms-2 dark:text-gray-400 dark:hover:text-white">Discover</Link>
+                                </div>
+                            </li>
+                            <li aria-current="page">
+                                <div className="flex items-center">
+                                    <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
+                                    </svg>
+                                    <span className="ms-1 text-sm font-medium text-black md:ms-2 dark:text-gray-400">{city.city_name}</span>
+                                </div>
+                            </li>
+                        </ol>
+                    </nav>
+                </>
+            ))}
 
-
-            <div className="h-60 bg-no-repeat bg-center bg-cover bg-[url('https://akholidaysnepal.com/wp-content/uploads/2018/10/bangkok.jpg')] ">
-            </div>
-
-            <section className="bg-white dark:bg-gray-900">
-                <div className="md:py-8 p-6 md:px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-                    <div className="flex justify-between items-center mb-5 text-gray-500">
-                        <span className="font-semibold text-md">YOUR ESSENTIAL GUIDE TO</span>
+            {city.map((city) => (
+                <>
+                    <div className="h-60 bg-no-repeat bg-center bg-cover " style={{backgroundImage: `url(${city.city_image})`}}>
                     </div>
-                    <h2 className="mb-5 text-7xl md:text-8xl font-medium tracking-tight text-black dark:text-white">Bangkok</h2>
-                    <p className="text-justify mb-5 text-lg font-light text-black dark:text-gray-400">Bangkok is the capital and most important city in Thailand, with a population of over 10 million people. Thanks to its growing economic development and massive popularity as an international tourist destination, it has become one of Southeast Asia's most influential and modern cities.</p>
-                </div>
-            </section>
 
+                    <section className="bg-white dark:bg-gray-900">
+                        <div className="md:py-8 p-6 md:px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+                            <div className="flex justify-between items-center mb-5 text-gray-500">
+                                <span className="font-semibold text-md">YOUR ESSENTIAL GUIDE TO</span>
+                            </div>
+                            <h2 className="mb-5 text-7xl md:text-8xl font-medium tracking-tight text-black dark:text-white">{city.city_name}</h2>
+                            <p className="text-justify mb-5 text-lg font-light text-black dark:text-gray-400">Bangkok is the capital and most important city in Thailand, with a population of over 10 million people. Thanks to its growing economic development and massive popularity as an international tourist destination, it has become one of Southeast Asia's most influential and modern cities.</p>
+                        </div>
+                    </section>
+                </>
+            ))}
             <div className="py-12 md:py-16 bg-black ">
-                <h1 className="mb-5 mx-10 md:mx-24 text-2xl md:text-3xl text-center tracking-tight font-medium text-white ">Things to do in Bangkok</h1>
-
+                {city.map((city) => (
+                    <h1 className="mb-5 mx-10 md:mx-24 text-2xl md:text-3xl text-center tracking-tight font-medium text-white ">Things to do in {city.city_name}</h1>
+                ))}
                 <div className="text-sm font-medium text-center items-center text-white">
                     <ul className="flex justify-center flex-wrap items-center -mb-px">
                         <li className="me-2">
@@ -78,11 +120,8 @@ export default function Destination() {
                         <li className="me-2">
                             <button className={`inline-block p-4 border-b-2 border-transparent ${activeTab === 'food' ? 'text-[#98DB2E] border-b-[#98DB2E]' : 'hover:text-[#98DB2E] hover:border-[#98DB2E]'}`} onClick={() => handleTabClick('food')}>Food</button>
                         </li>
-
-
-
-
                     </ul>
+
                     {/* Render content based on active tab */}
                     {activeTab === 'adventure' && <div className=" overflow-x-auto  py-10 px-10">
                         {/* <div className=" grid grid-cols-5 gap-6 mx-0   "> */}
@@ -153,7 +192,9 @@ export default function Destination() {
             </div>
 
             <div className="py-12 md:py-16 ">
-                <h1 className="mx-10 md:mx-24 text-2xl md:text-3xl tracking-tight font-medium text-black ">Tourist Attractions in Bangkok</h1>
+                {city.map((city) => (
+                    <h1 className="mx-10 md:mx-24 text-2xl md:text-3xl tracking-tight font-medium text-black ">Tourist Attractions in {city.city_name}</h1>
+                ))}
                 <div className=" py-10 md:py-16 px-10 md:px-32">
                     <div className=" grid grid-cols-1 gap-8 mx-0   ">
                         <button onClick={() => setOpenModal(true)} className="flex flex-col items-center bg-white border-2 border-gray-200 rounded-3xl hover:shadow-lg md:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -246,6 +287,6 @@ export default function Destination() {
                 </Modal.Body>
             </Modal>
 
-        </Layout>
+        </Layout >
     );
 }

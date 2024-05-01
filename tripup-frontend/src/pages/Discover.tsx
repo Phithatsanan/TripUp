@@ -74,7 +74,7 @@ export default function Discover() {
               {filteredCities.length > 0 ? (
                 filteredCities.map((city) => (
                   <div key={city.city_id} className=" min-w-max items-center hover:brightness-50">
-                    <Link to={`/destination/${city.city_name}`} className="block">
+                    <Link to={`/discover/${city.city_id}`} className="block">
                       <img
                         className="rounded-full w-60 h-40 object-cover"
                         src={city.city_image}
@@ -99,61 +99,17 @@ export default function Discover() {
           <h1 className="mb-5 mx-10 md:mx-24 text-2xl md:text-3xl text-center tracking-tight font-medium text-black">Best Destinations to Experience</h1>
 
           <div className=" overflow-x-auto py-10 px-10">
-            <div className=" grid grid-rows-1 grid-flow-col gap-8 mx-0   ">
+            <div className=" flex flex-nowrap gap-8 mx-0   ">
 
-              <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
-                <a href="#" className="block">
-                  <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+              <div className=" min-w-max items-center bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
+                <Link to="#" className="block">
+                  <img className="rounded-t-2xl w-72" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                   <div className="p-5">
                     <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Noteworthy </h5>
                   </div>
-                </a>
+                </Link>
               </div>
 
-              <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
-                <a href="#" className="block">
-                  <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                  <div className="p-5">
-                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Noteworthy </h5>
-                  </div>
-                </a>
-              </div>
-
-              <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
-                <a href="#" className="block">
-                  <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                  <div className="p-5">
-                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Noteworthy </h5>
-                  </div>
-                </a>
-              </div>
-
-              <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
-                <a href="#" className="block">
-                  <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                  <div className="p-5">
-                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Noteworthy </h5>
-                  </div>
-                </a>
-              </div>
-
-              <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
-                <a href="#" className="block">
-                  <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                  <div className="p-5">
-                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Noteworthy </h5>
-                  </div>
-                </a>
-              </div>
-
-              <div className=" w-72 bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
-                <a href="#" className="block">
-                  <img className="rounded-t-2xl" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-                  <div className="p-5">
-                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Noteworthy </h5>
-                  </div>
-                </a>
-              </div>
 
 
             </div>
