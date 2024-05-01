@@ -17,7 +17,7 @@ import { v4 as uuidv4 } from 'uuid';
 export default function Mytrip() {
     const [openModal, setOpenModal] = useState(false);
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-    const [loading, setLoading] = useState(true);
+    //const [loading, setLoading] = useState(true);
     const nameInputRef = useRef<HTMLInputElement>(null);
   
 
@@ -89,9 +89,8 @@ export default function Mytrip() {
             const tripColletionRef = collection(db, 'Trip');
             const newTripRef = doc(tripColletionRef, newTrip.trip_id);
             setOpenModal(false);
-            
             await setDoc(newTripRef, newTrip); // Add newTrip object to Firestore
-            setLoading(false);
+            //setLoading(false);
             setShowSuccessAlert(true);
             setTimeout(() => {
                 setShowSuccessAlert(false);
