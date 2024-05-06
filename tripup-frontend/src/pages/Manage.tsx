@@ -152,19 +152,19 @@ export default function Manage() {
                 <nav className="flex px-10 py-3 border-b " aria-label="Breadcrumb">
 
                     <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                        <li className="inline-flex items-center">
+                        {/* <li className="inline-flex items-center">
                             <Link to="/" className="inline-flex items-center text-sm font-medium text-black hover:text-[#98DB2E] dark:text-gray-400 dark:hover:text-white">
                                 <svg className="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
                                 </svg>
                                 Home
                             </Link>
-                        </li>
+                        </li> */}
                         <li>
                             <div className="flex items-center">
-                                <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                {/* <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
-                                </svg>
+                                </svg> */}
                                 <Link to="/mytrip" className="ms-1 text-sm font-medium text-black hover:text-[#98DB2E] md:ms-2 dark:text-gray-400 dark:hover:text-white">My Trip</Link>
                             </div>
                         </li>
@@ -174,7 +174,7 @@ export default function Manage() {
                                     <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                                     </svg>
-                                    <span className="ms-1 text-sm font-medium text-black md:ms-2 dark:text-gray-400">{trip.trip_name}</span>
+                                    <span className="ms-1 text-sm font-extrabold  text-black md:ms-2 dark:text-gray-400">{trip.trip_name}</span>
                                 </div>
                             </li>
                         ))}
@@ -183,17 +183,15 @@ export default function Manage() {
                 </nav>
                 {showSuccessAlert && (
                     <Alert color="success" className=" absolute inset-x-72 top-30 rounded-xl shadow-lg " onDismiss={() => setShowSuccessAlert(false)}>
-                        <span className=" font-medium">Trip added successfully!</span>
+                        <span className=" font-medium">Trip updated successfully!</span>
                     </Alert>
                 )}
 
-                {/* Trip heading bar  */}
+                {/* Trip content */}
                 <div className="py-10">
-                    {/* <div className="mx-24 mb-10 flex flex-wrap justify-between items-center ">
-                        <h1 className=" text-4xl  tracking-tight font-semibold text-black ">Manage Trip</h1>
-                    </div> */}
                     <div className="mx-14">
-                        <div className="flex flex-col items-center justify-between bg-white border-2 border-gray-300 rounded-3xl  md:flex-row md:max-w-full ">
+                        {/* Trip heading module */}
+                        <div className="flex flex-col items-center justify-between bg-white border-2 border-gray-300 rounded-3xl  md:flex-row md:max-w-full mb-10">
                             {trip && trip.map((trip) => (
                                 <><div className="bg-clip-border flex flex-col px-12 py-6 leading-normal">
 
@@ -223,8 +221,393 @@ export default function Manage() {
                         </div>
 
 
+
+
+                        <div className="flex flex-row gap-5">
+
+                            {/* Trip Day in details */}
+                            <div className="flex flex-col gap-5 w-3/5">
+                                <div>
+                                    <div className="flex items-center justify-between border-t-2 border-x-2 border-gray-300 bg-[#98DB2E] py-3 px-6 w-full rounded-t-3xl">
+                                        <h1 className="text-black font-semibold text-xl">Day 1</h1>
+                                        <button onClick={() => setEditTripModal(true)} className="flex items-center text-black bg-white dark:text-white hover:bg-black hover:text-white  font-medium rounded-lg text-sm w-30 px-3 py-1 dark:hover:bg-gray-700 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 me-2.5">
+                                                <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+                                                <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+                                            </svg>
+                                            Edit Plan
+                                        </button>
+                                    </div>
+                                    <div className="flex overflow-auto items-center bg-white border-x-2 border-b-2 border-gray-300 rounded-b-3xl  ">
+
+
+                                        <table className="mb-5 w-full text-sm text-center text-gray-500 dark:text-gray-400">
+                                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                <tr>
+                                                    <th scope="col" className="px-4 py-3">Time</th>
+                                                    <th scope="col" className="px-4 py-3">Duration</th>
+                                                    <th scope="col" className="px-4 py-3">Destination</th>
+                                                    <th scope="col" className="px-4 py-3">Location</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
+                                                    <td className="px-4 py-3">1 hr</td>
+                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
+
+                                                    {/* <td className="px-4 py-3 flex items-center justify-end">
+                                                        <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div id="apple-imac-27-dropdown" className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                            </ul>
+                                                            <div className="py-1">
+                                                                <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td> */}
+                                                </tr>
+
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
+                                                    <td className="px-4 py-3">1 hr</td>
+                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
+
+                                                    {/* <td className="px-4 py-3 flex items-center justify-end">
+                                                        <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div id="apple-imac-27-dropdown" className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                            </ul>
+                                                            <div className="py-1">
+                                                                <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td> */}
+                                                </tr>
+
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
+                                                    <td className="px-4 py-3">1 hr</td>
+                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
+
+                                                    {/* <td className="px-4 py-3 flex items-center justify-end">
+                                                        <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div id="apple-imac-27-dropdown" className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                            </ul>
+                                                            <div className="py-1">
+                                                                <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td> */}
+                                                </tr>
+
+
+                                            </tbody>
+
+                                        </table>
+
+
+
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div className="flex items-center justify-between border-t-2 border-x-2 border-gray-300 bg-[#98DB2E] py-3 px-6 w-full rounded-t-3xl">
+                                        <h1 className="text-black font-semibold text-xl">Day 2</h1>
+                                        <button onClick={() => setEditTripModal(true)} className="flex items-center text-black bg-white dark:text-white hover:bg-black hover:text-white  font-medium rounded-lg text-sm w-30 px-3 py-1 mr-2 dark:hover:bg-gray-700 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 me-2.5">
+                                                <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+                                                <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+                                            </svg>
+                                            Edit Trip
+                                        </button>
+                                    </div>
+                                    <div className="flex flex-col items-center justify-between bg-white border-x-2 border-b-2 border-gray-300 rounded-b-3xl  md:flex-row md:max-w-full ">
+                                        <table className="mb-5 w-full text-sm text-center text-gray-500 dark:text-gray-400">
+                                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                <tr>
+                                                    <th scope="col" className="px-4 py-3">Time</th>
+                                                    <th scope="col" className="px-4 py-3">Duration</th>
+                                                    <th scope="col" className="px-4 py-3">Destination</th>
+                                                    <th scope="col" className="px-4 py-3">Location</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
+                                                    <td className="px-4 py-3">1 hr</td>
+                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
+
+                                                    {/* <td className="px-4 py-3 flex items-center justify-end">
+                                                        <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div id="apple-imac-27-dropdown" className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                            </ul>
+                                                            <div className="py-1">
+                                                                <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td> */}
+                                                </tr>
+
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
+                                                    <td className="px-4 py-3">1 hr</td>
+                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
+
+                                                    {/* <td className="px-4 py-3 flex items-center justify-end">
+                                                        <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div id="apple-imac-27-dropdown" className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                            </ul>
+                                                            <div className="py-1">
+                                                                <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td> */}
+                                                </tr>
+
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
+                                                    <td className="px-4 py-3">1 hr</td>
+                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
+
+                                                    {/* <td className="px-4 py-3 flex items-center justify-end">
+                                                        <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div id="apple-imac-27-dropdown" className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                            </ul>
+                                                            <div className="py-1">
+                                                                <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td> */}
+                                                </tr>
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div className="flex items-center justify-between border-t-2 border-x-2 border-gray-300 bg-[#98DB2E] py-3 px-6 w-full rounded-t-3xl">
+                                        <h1 className="text-black font-semibold text-xl">Day 3</h1>
+                                        <button onClick={() => setEditTripModal(true)} className="flex items-center text-black bg-white dark:text-white hover:bg-black hover:text-white  font-medium rounded-lg text-sm w-30 px-3 py-1 mr-2 dark:hover:bg-gray-700 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 me-2.5">
+                                                <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+                                                <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+                                            </svg>
+                                            Edit Trip
+                                        </button>
+                                    </div>
+                                    <div className="flex flex-col items-center justify-between bg-white border-x-2 border-b-2 border-gray-300 rounded-b-3xl  md:flex-row md:max-w-full ">
+                                        <table className="mb-5 w-full text-sm text-center text-gray-500 dark:text-gray-400">
+                                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                                <tr>
+                                                    <th scope="col" className="px-4 py-3">Time</th>
+                                                    <th scope="col" className="px-4 py-3">Duration</th>
+                                                    <th scope="col" className="px-4 py-3">Destination</th>
+                                                    <th scope="col" className="px-4 py-3">Location</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
+                                                    <td className="px-4 py-3">1 hr</td>
+                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
+
+                                                    {/* <td className="px-4 py-3 flex items-center justify-end">
+                                                        <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div id="apple-imac-27-dropdown" className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                            </ul>
+                                                            <div className="py-1">
+                                                                <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td> */}
+                                                </tr>
+
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
+                                                    <td className="px-4 py-3">1 hr</td>
+                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
+
+                                                    {/* <td className="px-4 py-3 flex items-center justify-end">
+                                                        <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div id="apple-imac-27-dropdown" className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                            </ul>
+                                                            <div className="py-1">
+                                                                <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td> */}
+                                                </tr>
+
+                                                <tr className="border-b dark:border-gray-700">
+                                                    <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
+                                                    <td className="px-4 py-3">1 hr</td>
+                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
+
+                                                    {/* <td className="px-4 py-3 flex items-center justify-end">
+                                                        <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
+                                                            <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div id="apple-imac-27-dropdown" className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                                            <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="apple-imac-27-dropdown-button">
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#" className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                                </li>
+                                                            </ul>
+                                                            <div className="py-1">
+                                                                <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </td> */}
+                                                </tr>
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            {/* Direction module */}
+                            <div className="w-2/5 flex flex-col">
+                                <div className="flex items-center justify-between border-t-2 border-x-2 border-gray-300 bg-[#98DB2E] py-3 px-6 w-full rounded-t-3xl">
+                                    <h1 className="text-black font-semibold text-xl">Directions</h1>
+                                </div>
+                                <div className="flex flex-col  bg-white border-x-2 border-b-2 border-gray-300 rounded-b-3xl  h-full ">
+
+                                    {/* <div className="flex items-center justify-between border-2 border-gray-300 bg-[#98DB2E] py-3 px-6 w-full rounded-t-3xl">
+                                        <h1 className="text-black font-semibold text-lg">Day 1</h1>
+                                        <button onClick={() => setEditTripModal(true)} className="flex items-center text-black bg-white dark:text-white hover:bg-black hover:text-white  font-medium rounded-lg text-sm w-30 px-3 py-1 mr-2 dark:hover:bg-gray-700 ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 me-2.5">
+                                                <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+                                                <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+                                            </svg>
+                                            Edit Trip
+                                        </button>
+                                    </div> */}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
                     </div>
                 </div>
+
+
 
 
 
