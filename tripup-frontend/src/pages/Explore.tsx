@@ -115,18 +115,18 @@ export default function Explore() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {trips.map(trip => (
-                                <div key={trip.id} className="bg-white border-2 border-gray-300 rounded-3xl hover:shadow-lg dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 overflow-hidden">
-                                    <div className="flex flex-col md:flex-row px-4 py-6">
+                                <div key={trip.id} className="bg-white border-2 border-gray-300 rounded-3xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 overflow-hidden">
+                                    <div className="flex flex-col md:flex-row ">
                                         <div className="md:w-48 md:h-48 flex-shrink-0">
-                                            <img className="w-full h-full object-cover rounded-lg" src={trip.trip_image || 'default_trip_image.jpg'} alt="Trip" />
+                                            <img className="w-full h-full object-cover " src={trip.trip_image || 'default_trip_image.jpg'} alt="Trip" />
                                         </div>
-                                        <div className="p-4 flex flex-col justify-between">
+                                        <div className="p-5 flex flex-col justify-between">
                                             <div>
                                                 <h2 className="text-xl font-semibold">{trip.trip_name || 'Unnamed Trip'}</h2>
                                                 <p className="text-gray-600">{trip.trip_destination || 'No destination'}</p>
                                                 <p className="text-gray-500 text-sm">{trip.trip_date}</p>
                                             </div>
-                                            <div className="flex justify-center">
+                                            <div className="flex justify-left">
                                                 <button onClick={() => handleJoinTrip(trip.id)} className="inline-flex items-center px-5 py-3 text-base font-medium text-center text-gray-800 bg-[#98DB2E] rounded-lg hover:bg-[#99db2eca]">
                                                     Join Trip
                                                 </button>
