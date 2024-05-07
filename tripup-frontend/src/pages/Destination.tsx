@@ -495,26 +495,9 @@ Phuket is the largest island in Thailand and also the most popular with traveler
 
             <Modal dismissible show={openModal} className='bg-black ' size="7xl" position="center" onClose={() => setOpenModal(false)} >
                 <Modal.Header className="py-6 px-10 ">
-                    <h1 className="text-4xl font-medium">Wat Arun</h1>
+                    <h1 className="text-4xl font-medium">Work In Process</h1>
                 </Modal.Header>
                 <Modal.Body className="mx-5">
-                    <div className="flex space-x-5 mb-10  justify-left">
-                        <h1 className=" font-semibold text-xs">Address: 1 Tiantan E Rd, Dongcheng, Beijing, China Map</h1>
-                        <h1 className="font-semibold text-xs">Timings: 06:00 am - 08:00 pm</h1>
-                        <h1 className="font-semibold text-xs">Phone: +86-1067028866</h1>
-                        <h1 className="font-semibold text-xs">Ticket Price: 10 CNY</h1>
-                        <h1 className="font-semibold text-xs">  Time Required: 03:00 Hrs</h1>
-                    </div>
-
-                    {/* <h1 className='text-center mb-10 text-2xl font-medium text-black'>Sign In</h1> */}
-                    <div className=" ">
-                        <img className="float-right ml-10 mb-5 w-1/2 rounded-xl " src="https://lp-cms-production.s3.amazonaws.com/public/2021-06/500pxRF_28050155.jpg" alt="" />
-                        <h1 className=" text-justify">It used to enshrine the Phra Phuttha Maha Mani Rattana Patimakon (the Emerald Buddha) that was brought from Vientiane.
-                            It is located on Arun Amarin Road on the Thon Buri side of the Chao Phraya River directly opposite Wat Pho. It is a temple that has existed since the Ayutthaya period. Originally, it was called Wat Chaeng then later when the King of Krung Thon Buri moved the capital from Ayutthaya to establish Krung Thon Buri, the King graciously decided to have Wat Chaeng as a temple in the royal court area and established it to be a first-class royal temple of the Woramahawihan class. It used to enshrine the Phra Phuttha Maha Mani Rattana Patimakon (the Emerald Buddha) that was brought from Vientiane. This temple underwent a major enovation during the reign of King Rama II; therefore, it is considered a temple of that reign. When the restoration was completed, it was bestowed the royal name of wat arun Ratchatharam. In the reign of King Rama III, there was a construction of a large pagoda that is 82 metres high and 234 metres wide. It was completed in the reign of King Rama IV the Great, and changed its name to Wat Arun Ratchawararam like it is still called today. Open daily 08.00 - 18.00 hrs. Entrance fee : 200 baht. For further details contact, Tel. 0 2891 2185.</h1>
-
-                    </div>
-
-
 
                 </Modal.Body>
             </Modal>
