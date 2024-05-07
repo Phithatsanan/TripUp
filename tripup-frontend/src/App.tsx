@@ -73,7 +73,10 @@ export default function App() {
 
           <Route path="/mytrip" element={<ProtectedRoute><Mytrip /></ProtectedRoute>} />
           <Route path="/mytrip/:trip_id" element={<ProtectedRoute><Manage /></ProtectedRoute>} />
-          <Route path="/edit" element={<ProtectedRoute><Edit /></ProtectedRoute>} />
+          <Route path="/mytrip/:trip_id/:edit" element={<ProtectedRoute><Edit /></ProtectedRoute>} />
+
+          {/* temp only */}
+          <Route path="/discover/:city_id" element={<Destination />} />
 
           <Route path="*" element={<NoPage />} />
           {/* Add more routes as needed */}

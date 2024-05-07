@@ -2,8 +2,9 @@ import MytripLayout from "./Mytrip-Layout"
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { Modal, Alert } from "flowbite-react";
-import formatDateRange from "../utils/DateRangeFormatter";
+import { formatDateRange, calculateDuration } from "../utils/DateRangeFormatter";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { arrayRemove } from "firebase/firestore";
 
 import { collection, doc, deleteDoc, updateDoc, serverTimestamp, query, where, onSnapshot } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -24,8 +25,11 @@ export default function Manage() {
     const [editTripName, setEditTripName] = useState('');
     const [editTripDestination, setEditTripDestination] = useState('');
     const [editTripDate, setEditTripDate] = useState<any>('');
+    const [editTripDuration, setEditTripDuration] = useState<any>('');
+
 
     const [trip, setTrip] = useState<any[]>([]);
+    const [city, setCity] = useState<any[]>([]);
 
     // File Upload State
     const [imagePreview, setImagePreview] = useState('');
@@ -44,7 +48,9 @@ export default function Manage() {
 
     useEffect(() => {
         const formattedDateRange = formatDateRange(editStartDate, editEndDate);
+        const dateDuration = calculateDuration(editStartDate, editEndDate);
         setEditTripDate(formattedDateRange);
+        setEditTripDuration(dateDuration);
     }, [editStartDate, editEndDate]);
 
 
@@ -82,6 +88,7 @@ export default function Manage() {
                 trip_destination: editTripDestination,
                 trip_date: editTripDate,
                 start_date: editStartDate,
+                trip_duration: editTripDuration,
                 end_date: editEndDate,
                 trip_image: imageURL, // Add imageURL to the newTrip object
                 createdAt: serverTimestamp(),
@@ -97,6 +104,47 @@ export default function Manage() {
             }, 5000);
         } catch (error) {
             console.error("Error updating trip:", error); // Log error if adding trip fails
+        }
+    }
+
+    async function leaveTrip() {
+        if (!params.trip_id) {
+            console.error("Trip ID is undefined.");
+            return;
+        }
+
+        try {
+            const tripRef = doc(db, 'Trip', params.trip_id);
+            await updateDoc(tripRef, {
+                participants: arrayRemove(user.email)
+            });
+            navigate("/mytrip");
+        } catch (error) {
+            console.error("Failed to leave trip:", error);
+        }
+    }
+
+    async function getCity() {
+        try {
+            if (user) {
+                const cityColletionRef = collection(db, 'Cities');
+                const data = query(cityColletionRef);
+                // Fetch data from Firestore only if the user is authenticated
+                const unsubscribe = onSnapshot(data, querysnapshot => {
+                    const fetchedCity = querysnapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+                    setCity(fetchedCity); // Update the type of the trip state
+                    console.log(fetchedCity);
+                    console.log(city);
+                });
+
+                // Cleanup subscription
+                return () => unsubscribe();
+            }
+        } catch (err) {
+            console.error("Error fetch city from Cities collection:", err);
         }
     }
 
@@ -121,16 +169,19 @@ export default function Manage() {
         }
     }
 
-    // { trip.map((trip) => (
-    //     setEditTripName(trip.trip_name),
-    //     setEditTripDestination(trip.trip_destination),
-    //     setEditStartDate(trip.start_date),
-    //     setEditEndDate(trip.end_date)
-    // )) }
+    // {
+    //     trip.map((trip) => (
+    //         setEditTripName(trip.trip_name),
+    //         setEditTripDestination(trip.trip_destination),
+    //         setEditStartDate(trip.start_date),
+    //         setEditEndDate(trip.end_date)
+    //     ))
+    // }
 
 
     useEffect(() => {
-        getTrip()
+        getTrip(),
+            getCity()
     }, [params.trip_id]);
 
     async function deleteTrip() {
@@ -212,6 +263,12 @@ export default function Manage() {
                                             </svg>
                                             Delete Trip
                                         </button>
+                                        <button onClick={leaveTrip} className="flex items-center text-white bg-blue-600 hover:bg-blue-500 font-medium rounded-lg text-sm px-4 py-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 mr-2">
+                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm2-11a1 1 0 11-2 0 1 1 0 012 0zm-2 3a1 1 0 000 2h.01a1 1 0 000-2H10z" clipRule="evenodd" />
+                                            </svg>
+                                            Leave Trip
+                                        </button>
                                     </div>
 
                                 </div>
@@ -230,7 +287,7 @@ export default function Manage() {
                                 <div>
                                     <div className="flex items-center justify-between border-t-2 border-x-2 border-gray-300 bg-[#98DB2E] py-3 px-6 w-full rounded-t-3xl">
                                         <h1 className="text-black font-semibold text-xl">Day 1</h1>
-                                        <button onClick={() => setEditTripModal(true)} className="flex items-center text-black bg-white dark:text-white hover:bg-black hover:text-white  font-medium rounded-lg text-sm w-30 px-3 py-1 dark:hover:bg-gray-700 ">
+                                        <button onClick={() => setEditTripModal(true)} className=" flex items-center text-black bg-white dark:text-white hover:bg-black hover:text-white  font-medium rounded-lg text-sm w-30 px-3 py-1 dark:hover:bg-gray-700 ">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 me-2.5">
                                                 <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
                                                 <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
@@ -257,7 +314,7 @@ export default function Manage() {
                                                     <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
                                                     <td className="px-4 py-3">1 hr</td>
                                                     <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
-                                                    <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
+                                                    <td className="px-4 py-3"><a className="hover:underline decoration-2 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
 
                                                     {/* <td className="px-4 py-3 flex items-center justify-end">
                                                         <button id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
@@ -355,7 +412,7 @@ export default function Manage() {
                                                 <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
                                                 <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                                             </svg>
-                                            Edit Trip
+                                            Edit Plan
                                         </button>
                                     </div>
                                     <div className="flex flex-col items-center justify-between bg-white border-x-2 border-b-2 border-gray-300 rounded-b-3xl  md:flex-row md:max-w-full ">
@@ -470,7 +527,7 @@ export default function Manage() {
                                                 <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
                                                 <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                                             </svg>
-                                            Edit Trip
+                                            Edit Plan
                                         </button>
                                     </div>
                                     <div className="flex flex-col items-center justify-between bg-white border-x-2 border-b-2 border-gray-300 rounded-b-3xl  md:flex-row md:max-w-full ">
@@ -613,67 +670,69 @@ export default function Manage() {
 
                 <Modal dismissible show={editTripModal} className='bg-black ' size="4xl" position="center" onClose={() => setEditTripModal(false)} >
                     <Modal.Header className="py-5 px-10 ">
-                        <h1 className="text-3xl font-medium">Edit Trip</h1>
+                        <h1 className="text-3xl font-medium">Edit Plan</h1>
                     </Modal.Header>
                     <Modal.Body className="mx-5">
-                        <form onSubmit={onSubmitUpdateTrip}>
-                            <div className="grid grid-rows-3 grid-flow-col gap-5 ">
-                                <div className=" col-span-2">
-                                    <label htmlFor="Trip name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Name</label>
-                                    <input type="text" name="name" id="Trip name" defaultValue={editTripName} onChange={(e) => setEditTripName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter trip name" />
-                                </div>
-                                <div className=" col-span-2">
-                                    <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Destination</label>
-                                    <select id="category" defaultValue={editTripDestination} onChange={(e) => setEditTripDestination(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                        <option >Select destination city</option>
-                                        <option selected value="Bangkok">Bangkok</option>
-                                        <option value="Phuket">Phuket</option>
-                                        <option value="Chiangmai">Chiangmai</option>
-                                        <option value="Khaoyai">Khaoyai</option>
-                                    </select>
-                                </div>
+                        {trip.map((trip) => (
+                            <form onSubmit={onSubmitUpdateTrip}>
+                                <div className="grid grid-rows-3 grid-flow-col gap-5 ">
+                                    <div className=" col-span-2">
+                                        <label htmlFor="Trip name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Name</label>
+                                        <input type="text" name="name" id="Trip name" defaultValue={trip.trip_name} onChange={(e) => setEditTripName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Enter trip name" />
+                                    </div>
+                                    <div className=" col-span-2">
+                                        <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Destination</label>
+                                        <select id="category" defaultValue={trip.trip_destination} onChange={(e) => setEditTripDestination(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                            <option >Select destination city</option>
+                                            {city.map((city) => (
+                                                <option value={city.city_name}>{city.city_name}</option>
+                                            ))}
+                                        </select>
+                                    </div>
 
-                                <div className="col-span-2">
+                                    <div className="col-span-2">
 
-                                    <label htmlFor="startdate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Duration <span className=" font-light text-xs text-red-600">[Fill in date as following format MM/DD/YYYY]</span></label>
-                                    <div date-rangepicker="true" className="flex items-center ">
-                                        <div className="relative">
-                                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                                                </svg>
+                                        <label htmlFor="startdate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trip Duration <span className=" font-light text-xs text-red-600">[Fill in date as following format MM/DD/YYYY]</span></label>
+                                        <div date-rangepicker="true" className="flex items-center ">
+                                            <div className="relative">
+                                                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                                    </svg>
+                                                </div>
+                                                <input name="start" type="text" defaultValue={trip.start_date} onChange={(e) => setEditStartDate(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start" />
                                             </div>
-                                            <input name="start" type="text" defaultValue={editStartDate} onChange={(e) => setEditStartDate(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date start" />
-                                        </div>
-                                        <span className="mx-4 text-gray-500">to</span>
-                                        <div className="relative">
-                                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                                                </svg>
+                                            <span className="mx-4 text-gray-500">to</span>
+                                            <div className="relative">
+                                                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                                    </svg>
+                                                </div>
+                                                <input name="end" type="text" defaultValue={trip.end_date} onChange={(e) => setEditEndDate(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end" />
                                             </div>
-                                            <input name="end" type="text" defaultValue={editEndDate} onChange={(e) => setEditEndDate(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#98DB2E] focus:border-[#98DB2E] block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date end" />
                                         </div>
                                     </div>
-                                </div>
-                                <div className="row-span-3 col-span-12 items-center content-center space-y-4 ">
-                                    <div className="flex items-center justify-center w-full ">
-                                        <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center   cursor-pointer   ">
-                                            <div className=" text-center text-gray-500 dark:text-gray-400 hover:brightness-50">
-                                                <img className="mx-auto ring-1 ring-gray-300 w-auto h-52 rounded-2xl" src={imagePreview || 'https://www.survivorsuk.org/wp-content/uploads/2017/01/no-image.jpg'} alt="" />
-                                            </div>
-                                            <input id="dropzone-file" type="file" onChange={onImageChange} className="hidden" />
-                                            {/* <button onClick={uploadTripImage} className="absolute bottom-28 text-black bg-[#98DB2E] hover:bg-[#99db2eca] font-normal rounded-lg text-xs px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Change</button> */}
-                                        </label>
+                                    <div className="row-span-3 col-span-12 items-center content-center space-y-4 ">
+                                        <div className="flex items-center justify-center w-full ">
+                                            <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center   cursor-pointer   ">
+                                                <div className=" text-center text-gray-500 dark:text-gray-400 hover:brightness-50">
+                                                    <img className="mx-auto ring-1 ring-gray-300 w-auto h-52 rounded-2xl" src={imagePreview || 'https://www.survivorsuk.org/wp-content/uploads/2017/01/no-image.jpg'} alt="" />
+                                                </div>
+                                                <input id="dropzone-file" type="file" onChange={onImageChange} className="hidden" />
+                                                {/* <button onClick={uploadTripImage} className="absolute bottom-28 text-black bg-[#98DB2E] hover:bg-[#99db2eca] font-normal rounded-lg text-xs px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Change</button> */}
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
-                            <div className="flex items-center mt-10  border-gray-200  dark:border-gray-600">
-                                <button type="submit" className="text-black bg-[#98DB2E] hover:bg-[#99db2eca]  font-medium rounded-lg text-sm px-7 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
-                                <button onClick={() => setEditTripModal(false)} className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100  dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
-                            </div>
-                        </form>
+                                </div>
+                                <div className="flex items-center mt-10  border-gray-200  dark:border-gray-600">
+                                    <button type="submit" className="text-black bg-[#98DB2E] hover:bg-[#99db2eca]  font-medium rounded-lg text-sm px-7 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                                    <button onClick={() => setEditTripModal(false)} className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100  dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
+                                </div>
+                            </form>
+                        ))
+                        }
                     </Modal.Body>
                 </Modal>
 
