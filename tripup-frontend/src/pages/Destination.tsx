@@ -492,16 +492,11 @@ Phuket is the largest island in Thailand and also the most popular with traveler
                 
             </div>
 
-
             <Modal dismissible show={openModal} className='bg-black ' size="7xl" position="center" onClose={() => setOpenModal(false)} >
-                <Modal.Header className="py-6 px-10 ">
+                <Modal.Header className="py-6 px-10">
                     <h1 className="text-4xl font-medium">Work In Process</h1>
                 </Modal.Header>
-                <Modal.Body className="mx-5">
-
-                </Modal.Body>
             </Modal>
-
         </Layout >
     );
 }
