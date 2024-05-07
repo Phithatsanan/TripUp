@@ -105,10 +105,55 @@ export default function Discover() {
                 <Link to="#" className="block">
                   <img className="rounded-t-2xl w-72" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
                   <div className="p-5">
-                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Noteworthy </h5>
+                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Work in Process </h5>
                   </div>
                 </Link>
               </div>
+              <div className=" min-w-max items-center bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
+                <Link to="#" className="block">
+                  <img className="rounded-t-2xl w-72" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                  <div className="p-5">
+                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Work in Process </h5>
+                  </div>
+                </Link>
+              </div>
+              <div className=" min-w-max items-center bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
+                <Link to="#" className="block">
+                  <img className="rounded-t-2xl w-72" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                  <div className="p-5">
+                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Work in Process </h5>
+                  </div>
+                </Link>
+              </div>
+              <div className=" min-w-max items-center bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
+                <Link to="#" className="block">
+                  <img className="rounded-t-2xl w-72" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                  <div className="p-5">
+                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Work in Process </h5>
+                  </div>
+                </Link>
+              </div>
+              <div className=" min-w-max items-center bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
+                <Link to="#" className="block">
+                  <img className="rounded-t-2xl w-72" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                  <div className="p-5">
+                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Work in Process </h5>
+                  </div>
+                </Link>
+              </div>
+              <div className=" min-w-max items-center bg-white border border-gray-300 rounded-2xl hover:shadow-xl ">
+                <Link to="#" className="block">
+                  <img className="rounded-t-2xl w-72" src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                  <div className="p-5">
+                    <h5 className=" text-md font-medium tracking-tight text-gray-900 dark:text-white">Work in Process </h5>
+                  </div>
+                </Link>
+              </div>
+
+
+
+
+
 
 
 
