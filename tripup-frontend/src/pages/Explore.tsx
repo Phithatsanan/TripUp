@@ -5,7 +5,7 @@ import Layout from "./Layout";
 import { collection, getDocs, updateDoc, doc, query, orderBy, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { Context } from '../auth/authcontext';
-import { Modal } from 'flowbite-react';
+import { Modal, Alert } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import { auth, provider } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
@@ -25,7 +25,8 @@ export default function Explore() {
     const [loginModalOpen, setLoginModalOpen] = useState(false);
     const navigate = useNavigate();
     const [, setOpenLogin] = useState(false);
-
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+    const [showUnSuccessAlert, setShowUnSuccessAlert] = useState(false);
 
     useEffect(() => {
         const fetchTrips = async () => {
@@ -61,13 +62,15 @@ export default function Explore() {
                 if (!tripData.participants.includes(user.email)) {
                     tripData.participants.push(user.email);
                 } else {
-                    alert('You are already a participant in this trip!');
+                    setShowUnSuccessAlert(true);
+                    setTimeout(() => setShowSuccessAlert(false), 5000);
                     return;
                 }
 
                 await updateDoc(tripDocRef, { participants: tripData.participants });
-                alert('Successfully joined the trip!');
-                navigate('/mytrip'); // Navigate to My Trip page after joining
+                setShowSuccessAlert(true);
+                setTimeout(() => setShowSuccessAlert(false), 5000);
+                //navigate('/mytrip'); // Navigate to My Trip page after joining
             } else {
                 console.error('Trip data not found');
                 alert('Failed to join the trip. Please try again.');
@@ -109,6 +112,16 @@ export default function Explore() {
             <Layout>
                 <section className="bg-white dark:bg-gray-900">
                     <div className="py-10 px-10 mx-auto max-w-screen-xl sm:py-16 sm:px-6">
+                        {showSuccessAlert && (
+                            <Alert color="success" className="absolute inset-x-72 top-20 rounded-xl shadow-lg" onDismiss={() => setShowUnSuccessAlert(false)}>
+                                <span className="font-medium">Trip joined successfully!</span>
+                            </Alert>
+                        )}
+                        {showUnSuccessAlert && (
+                            <Alert color="failure" className="absolute inset-x-72 top-20 rounded-xl shadow-lg" onDismiss={() => setShowSuccessAlert(false)}>
+                                <span className="font-medium">Trip already joined!</span>
+                            </Alert>
+                        )}
                         <div className="mx-auto max-w-screen-sm text-center">
                             <h1 className="mb-8 text-2xl tracking-tight font-medium">Explore your favorite trip!</h1>
                         </div>
