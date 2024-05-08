@@ -313,7 +313,7 @@ export default function Manage() {
                                                 <tr className="border-b dark:border-gray-700">
                                                     <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
                                                     <td className="px-4 py-3">1 hr</td>
-                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3">Cafe and Bar</td>
                                                     <td className="px-4 py-3"><a className="hover:underline decoration-2 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
 
                                                     {/* <td className="px-4 py-3 flex items-center justify-end">
@@ -341,7 +341,7 @@ export default function Manage() {
                                                 <tr className="border-b dark:border-gray-700">
                                                     <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
                                                     <td className="px-4 py-3">1 hr</td>
-                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3">Cafe and Bar</td>
                                                     <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
 
                                                     {/* <td className="px-4 py-3 flex items-center justify-end">
@@ -369,7 +369,7 @@ export default function Manage() {
                                                 <tr className="border-b dark:border-gray-700">
                                                     <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
                                                     <td className="px-4 py-3">1 hr</td>
-                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3">Cafe and Bar</td>
                                                     <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
 
                                                     {/* <td className="px-4 py-3 flex items-center justify-end">
@@ -431,7 +431,7 @@ export default function Manage() {
                                                 <tr className="border-b dark:border-gray-700">
                                                     <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
                                                     <td className="px-4 py-3">1 hr</td>
-                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3">Cafe and Bar</td>
                                                     <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
 
                                                     {/* <td className="px-4 py-3 flex items-center justify-end">
@@ -459,7 +459,7 @@ export default function Manage() {
                                                 <tr className="border-b dark:border-gray-700">
                                                     <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
                                                     <td className="px-4 py-3">1 hr</td>
-                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3">Cafe and Bar</td>
                                                     <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
 
                                                     {/* <td className="px-4 py-3 flex items-center justify-end">
@@ -487,7 +487,7 @@ export default function Manage() {
                                                 <tr className="border-b dark:border-gray-700">
                                                     <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
                                                     <td className="px-4 py-3">1 hr</td>
-                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3">Cafe and Bar</td>
                                                     <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
 
                                                     {/* <td className="px-4 py-3 flex items-center justify-end">
@@ -546,7 +546,7 @@ export default function Manage() {
                                                 <tr className="border-b dark:border-gray-700">
                                                     <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
                                                     <td className="px-4 py-3">1 hr</td>
-                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3">Cafe and Bar</td>
                                                     <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
 
                                                     {/* <td className="px-4 py-3 flex items-center justify-end">
@@ -574,7 +574,7 @@ export default function Manage() {
                                                 <tr className="border-b dark:border-gray-700">
                                                     <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
                                                     <td className="px-4 py-3">1 hr</td>
-                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3">Cafe and Bar</td>
                                                     <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
 
                                                     {/* <td className="px-4 py-3 flex items-center justify-end">
@@ -602,7 +602,7 @@ export default function Manage() {
                                                 <tr className="border-b dark:border-gray-700">
                                                     <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">08:00 AM</th>
                                                     <td className="px-4 py-3">1 hr</td>
-                                                    <td className="px-4 py-3">Dr.Natasha Cafe and Bar</td>
+                                                    <td className="px-4 py-3">Cafe and Bar</td>
                                                     <td className="px-4 py-3"><a className="undeline underline-offset-1 text-blue-700" target="_blank" href="https://google.com">Google Maps</a></td>
 
                                                     {/* <td className="px-4 py-3 flex items-center justify-end">
